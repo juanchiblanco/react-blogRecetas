@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import Menu from "./shared/Menu";
 import { BrowserRouter } from "react-router";
+import Footer from "./shared/Footer";
 
 function App() {
 
@@ -8,7 +9,10 @@ function App() {
     <>
     <BrowserRouter>
     <Menu></Menu>
-      <h1>Hola Mundo</h1>
+    <main className="container my-3">
+      <h1 className="text-center">Hola Mundo</h1>
+      </main>
+      <Footer></Footer>
       </BrowserRouter>
     </>
   )
