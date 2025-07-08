@@ -28,7 +28,7 @@ const DetalleProducto = () => {
               <Card.Text className="raleway">
                 Ingredientes
               </Card.Text>
-              <ul className="my-2">
+              <ul className="my-2 raleway">
                     <li>400 g de spaghetti</li>
                     <li>300 g de carne picada de res</li>
                     <li>1 cebolla mediana</li>
@@ -44,7 +44,7 @@ const DetalleProducto = () => {
               <Card.Text className="raleway">
                 Pasos
               </Card.Text>
-              <ol className="my-2">
+              <ol className="my-2 raleway">
                     <li className="mt-3">Cocinar la pasta
 En una olla con agua hirviendo y sal, cocina los spaghetti según las instrucciones del paquete. Escúrrelos y resérvalos.</li>
                     <li className="mt-3">Preparar la salsa
