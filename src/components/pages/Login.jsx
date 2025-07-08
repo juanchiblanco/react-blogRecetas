@@ -1,5 +1,6 @@
 import { Col, Form, Row, Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router";
 
 const Login = () => {
 
@@ -9,12 +10,27 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+//   const navegacion = useNavigate()
+
+//   const inciarSesion = (usuario) => {
+//     console.log(usuario);
+//     if (
+//       usuario.email === import.meta.env.VITE_API_EMAIL &&
+//       usuario.password === import.meta.env.VITE_API_PASSWORD
+//     ) {
+//       setUsuarioAdmin(true)
+//       sessionStorage.setItem('userKey', true)
+//       navegacion('/administrador')
+//     } else {
+//     }
+//   };
+
     return (
         <section className="container">
-      <h1 className="my-3 text-center tinos">Login</h1>
+      <h1 className="my-3 text-center tinos">Inicia sesión</h1>
       <Row xs={1} md={2}>
         <Col>
-          <Form className="raleway" onSubmit={handleSubmit((e)=>e.preventDefault)}>
+          <Form className="raleway" onSubmit={handleSubmit}>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
