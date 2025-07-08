@@ -16,3 +16,9 @@ main {
 .raleway {
   font-family: "Raleway", sans-serif;
 }
+
+.imgBanner{
+  object-fit: cover;
+  height: 400px;
+  width: 100%;
+}

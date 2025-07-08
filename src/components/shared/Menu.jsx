@@ -4,7 +4,7 @@ import 'bootstrap-icons/font/bootstrap-icons.css';
 
 const Menu = () => {
   return (
-    <Navbar expand="lg" className="bg-body-tertiary" data-bs-theme="light">
+    <Navbar expand="lg" className="bg-body-tertiary border-bottom border-black-subtle" data-bs-theme="light">
       <Container>
         <Navbar.Brand  href="/">
             <div className="d-flex gap-2 mt-2">
