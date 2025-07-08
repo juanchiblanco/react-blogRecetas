@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 
 const Inicio = () => {
   return (
@@ -22,6 +22,9 @@ const Inicio = () => {
         </div>
         <hr />
         <h4 className="mt-5">Explora una colección de recetas fáciles, sabrosas y para todos los niveles.</h4>
+        <Row>
+          
+        </Row>
         </Container>
     </section>
   );
