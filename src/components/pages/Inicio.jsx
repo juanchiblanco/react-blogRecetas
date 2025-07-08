@@ -1,14 +1,13 @@
-
 const Inicio = () => {
-    return (
-        <section>
+  return (
+    <section>
       <img
-        className="imgBanner"
+        className="imgBanner opacity-50"
         src="https://images.pexels.com/photos/1640774/pexels-photo-1640774.jpeg"
         alt="Plato de comida"
       />
     </section>
-    );
+  );
 };
 
 export default Inicio;
