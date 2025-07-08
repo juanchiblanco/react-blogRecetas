@@ -13,6 +13,10 @@ main {
   flex-grow: 1;
 }
 
+.tinos{
+  font-family: "Tinos", sans-serif;
+}
+
 .raleway {
   font-family: "Raleway", sans-serif;
 }

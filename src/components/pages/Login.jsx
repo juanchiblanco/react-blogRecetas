@@ -1,3 +1,6 @@
+import { Col, Form, Row, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
+
 const Login = () => {
 
     const {
@@ -8,10 +11,10 @@ const Login = () => {
 
     return (
         <section className="container">
-      <h1 className="my-3 text-center">Login</h1>
+      <h1 className="my-3 text-center tinos">Login</h1>
       <Row xs={1} md={2}>
         <Col>
-          <Form onSubmit={handleSubmit(inciarSesion)}>
+          <Form className="raleway" onSubmit={handleSubmit((e)=>e.preventDefault)}>
             <Form.Group className="mb-3" controlId="email">
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -57,9 +60,9 @@ const Login = () => {
         </Col>
         <Col>
           <img
-            src="https://images.pexels.com/photos/885021/pexels-photo-885021.jpeg"
+            src="https://images.pexels.com/photos/32904717/pexels-photo-32904717.jpeg"
             alt="cafe"
-            className="w-100"
+            className="w-100 rounded mt-3 mt-md-0"
           />
         </Col>
       </Row>
