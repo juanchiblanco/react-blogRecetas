@@ -26,7 +26,7 @@ const Login = () => {
                     value:
                       /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/,
                     message:
-                      "El email debe tener un formato valido, por ejempl juanperez@mail.com",
+                      "El email debe tener un formato valido, por ejemplo juanperez@mail.com",
                   },
                 })}
               />
