@@ -1,4 +1,5 @@
 import { Container, Row } from "react-bootstrap";
+import CardReceta from "./producto/CardReceta";
 
 const Inicio = () => {
   return (
@@ -23,7 +24,7 @@ const Inicio = () => {
         <hr />
         <h4 className="mt-5">Explora una colección de recetas fáciles, sabrosas y para todos los niveles.</h4>
         <Row>
-          
+          <CardReceta></CardReceta>
         </Row>
         </Container>
     </section>
