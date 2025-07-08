@@ -12,7 +12,7 @@ const CardReceta = () => {
           />
         </div>
         <Card.Body>
-          <Card.Title className="primary-font text-center tinos">Spaghetti a la bolognesa</Card.Title>
+          <Card.Title className="primary-font text-center tinos">Spaghetti a la Boloñesa</Card.Title>
           <Card.Text className="text-center raleway">
             Un clásico italiano elaborado con pasta y una salsa rica a base de carne picada, tomate, cebolla y especias. Es una receta fácil de preparar y perfecta para compartir en familia. <br className="mb-2" />
           </Card.Text>

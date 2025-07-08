@@ -6,6 +6,7 @@ import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import Login from "./components/pages/Login";
+import DetalleProducto from "./components/pages/DetalleProducto";
 
 function App() {
   return (
@@ -15,6 +16,10 @@ function App() {
         <main className="mb-3">
           <Routes>
             <Route path="/" element={<Inicio></Inicio>}></Route>
+            <Route
+              path="/detalle"
+              element={<DetalleProducto></DetalleProducto>}
+            ></Route>
             <Route
               path="/login"
               element={<Login></Login>}
