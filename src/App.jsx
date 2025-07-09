@@ -8,6 +8,7 @@ import Inicio from "./components/pages/Inicio";
 import Login from "./components/pages/Login";
 import DetalleProducto from "./components/pages/DetalleProducto";
 import { useState } from "react";
+import ProtectorAdmin from "./components/ProtectorAdmin";
 
 function App() {
   const usuarioLogueado = sessionStorage.getItem("userKey") || false;
@@ -38,16 +39,6 @@ function App() {
               }
             >
               <Route index element={<Administrador></Administrador>}></Route>
-
-              <Route
-                path="crear"
-                element={<FormularioProducto></FormularioProducto>}
-              ></Route>
-
-              <Route
-                path="editar"
-                element={<FormularioProducto></FormularioProducto>}
-              ></Route>
             </Route>
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
