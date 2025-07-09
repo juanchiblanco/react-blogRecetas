@@ -2,7 +2,7 @@ import { Button, Table } from "react-bootstrap";
 
 const Administrador = () => {
     return (
-        <section className="container mainSection">
+        <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
         <h1 className="display-4 tinos">Mis Recetas</h1>
         <div>
