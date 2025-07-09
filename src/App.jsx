@@ -10,14 +10,16 @@ import DetalleProducto from "./components/pages/DetalleProducto";
 import { useState } from "react";
 
 function App() {
-  const usuarioLogueado = sessionStorage.getItem('userKey') || false
-  const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado)
+  const usuarioLogueado = sessionStorage.getItem("userKey") || false;
+  const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
 
   return (
     <>
       <BrowserRouter>
-        <Menu usuarioAdmin={usuarioAdmin}
-          setUsuarioAdmin={setUsuarioAdmin}></Menu>
+        <Menu
+          usuarioAdmin={usuarioAdmin}
+          setUsuarioAdmin={setUsuarioAdmin}
+        ></Menu>
         <main className="mb-3">
           <Routes>
             <Route path="/" element={<Inicio></Inicio>}></Route>
@@ -31,8 +33,22 @@ function App() {
             ></Route>
             <Route
               path="/administrador"
-              element={<Administrador usuarioAdmin={usuarioAdmin}></Administrador>}
-            ></Route>
+              element={
+                <ProtectorAdmin usuarioAdmin={usuarioAdmin}></ProtectorAdmin>
+              }
+            >
+              <Route index element={<Administrador></Administrador>}></Route>
+
+              <Route
+                path="crear"
+                element={<FormularioProducto></FormularioProducto>}
+              ></Route>
+
+              <Route
+                path="editar"
+                element={<FormularioProducto></FormularioProducto>}
+              ></Route>
+            </Route>
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
         </main>
