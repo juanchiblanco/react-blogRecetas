@@ -7,12 +7,17 @@ import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import Login from "./components/pages/Login";
 import DetalleProducto from "./components/pages/DetalleProducto";
+import { useState } from "react";
 
 function App() {
+  const usuarioLogueado = sessionStorage.getItem('userKey') || false
+  const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado)
+
   return (
     <>
       <BrowserRouter>
-        <Menu></Menu>
+        <Menu usuarioAdmin={usuarioAdmin}
+          setUsuarioAdmin={setUsuarioAdmin}></Menu>
         <main className="mb-3">
           <Routes>
             <Route path="/" element={<Inicio></Inicio>}></Route>
@@ -22,11 +27,11 @@ function App() {
             ></Route>
             <Route
               path="/login"
-              element={<Login></Login>}
+              element={<Login setUsuarioAdmin={setUsuarioAdmin}></Login>}
             ></Route>
             <Route
               path="/administrador"
-              element={<Administrador></Administrador>}
+              element={<Administrador usuarioAdmin={usuarioAdmin}></Administrador>}
             ></Route>
             <Route path="*" element={<Error404></Error404>}></Route>
           </Routes>
