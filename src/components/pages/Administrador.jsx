@@ -52,6 +52,11 @@ const Administrador = () => {
               <Form.Control type="number" placeholder="Ej: 50" />
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formPorciones">
+              <Form.Label>Cantidad de porciones*</Form.Label>
+              <Form.Control type="number" placeholder="Ej: 50" />
+              <Form.Text className="text-danger"></Form.Text>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formImagen">
               <Form.Label>Imagen URL*</Form.Label>
               <Form.Control
@@ -70,29 +75,44 @@ const Administrador = () => {
               </Form.Select>
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formIngrediente">
+            <Form.Group className="mb-3" controlId="formIngredientes">
               <Form.Label>Ingredientes*</Form.Label>
+              <div className="d-flex gap-1">
               <Form.Control
+              className="w-75"
                 type="text"
                 placeholder="Ej: Una taza de café suave y aromático."
-                as="textarea"
               />
+              <Button type="button" variant="success" className="w-25">
+              Agregar ingrediente
+            </Button>
+            </div>
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formPasos">
               <Form.Label>Pasos a seguir*</Form.Label>
+              <div className="d-flex gap-1">
               <Form.Control
+              className="w-75"
                 type="text"
-                placeholder="Ej: El café americano es una bebida caliente que consiste en un espresso diluido con agua caliente, lo que resulta en una taza de café suave y aromático. Es una opción popular para aquellos que prefieren un café menos intenso que el espresso tradicional. Perfecto para disfrutar en cualquier momento del día."
-                as="textarea"
-                rows={4}
+                placeholder="Ej: Una taza de café suave y aromático."
               />
+              <Button type="button" variant="success" className="w-25">
+              Agregar paso
+            </Button>
+            </div>
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
-
-            <Button type="submit" variant="success">
-              Guardar
-            </Button>
+            <Form.Group className="mb-3" controlId="formConsejo">
+          <Form.Label>Consejo adicional</Form.Label>
+          <Form.Control
+            type="text"
+            placeholder="Ej: Una taza de café suave y aromático."
+            as="textarea"
+           
+          />
+          <Form.Text className="text-danger"></Form.Text>
+        </Form.Group>
           </Form>
         </Modal.Body>
         <Modal.Footer>
