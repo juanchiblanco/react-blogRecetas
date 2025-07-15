@@ -37,6 +37,8 @@ const Administrador = () => {
       return;
     }
 
+    receta.id = uuidv4()
+
     const recetaCompleta = {
       ...receta,
       ingredientes,

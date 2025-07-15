@@ -2,6 +2,10 @@ import { Container, Row } from "react-bootstrap";
 import CardReceta from "./producto/CardReceta";
 
 const Inicio = () => {
+
+  const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
+  console.log(recetasLocalStorage)
+
   return (
     <section>
       <article>
@@ -24,7 +28,9 @@ const Inicio = () => {
         <hr />
         <h4 className="mt-5">Explora una colección de recetas fáciles, sabrosas y para todos los niveles.</h4>
         <Row>
-          <CardReceta></CardReceta>
+          {
+            recetasLocalStorage.map((receta)=> <CardReceta receta={receta} key={receta.id}></CardReceta>)
+          }
         </Row>
         </Container>
     </section>
