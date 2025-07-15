@@ -28,10 +28,10 @@ const Administrador = () => {
           <tr className="text-center">
             <th>ID</th>
             <th>Receta</th>
-            <th>Precio</th>
+            <th>Duración</th>
             <th>URL de Imagen</th>
-            <th>Categoria</th>
-            <th>Nivel</th>
+            <th>Dificultad</th>
+            <th>Porciones</th>
           </tr>
         </thead>
         <tbody></tbody>
