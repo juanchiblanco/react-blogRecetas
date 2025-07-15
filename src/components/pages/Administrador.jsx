@@ -53,6 +53,12 @@ const Administrador = () => {
 
     setRecetas([...recetas, recetaCompleta]);
 
+    Swal.fire({
+  title: "Receta agregada!",
+  text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
+  icon: "success"
+});
+
     reset();
     setIngredientes([]);
     setPasos([]);
