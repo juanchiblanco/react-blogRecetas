@@ -4,7 +4,6 @@ import CardReceta from "./producto/CardReceta";
 const Inicio = () => {
 
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
-  console.log(recetasLocalStorage)
 
   return (
     <section>

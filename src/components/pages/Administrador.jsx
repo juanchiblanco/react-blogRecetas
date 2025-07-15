@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { datosPrueba } from "../../data/datosPrueba";
 import { v4 as uuidv4 } from 'uuid';
-import ItemProducto from "./producto/ItemProducto";
+import ItemReceta from "./producto/ItemReceta";
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
@@ -137,7 +137,7 @@ const Administrador = () => {
         </thead>
         <tbody>
           {
-            recetas.map((receta, indice)=> <ItemProducto key={receta.id} receta={receta} fila={indice + 1}></ItemProducto>)
+            recetas.map((receta, indice)=> <ItemReceta key={receta.id} receta={receta} fila={indice + 1}></ItemReceta>)
           }
         </tbody>
       </Table>
