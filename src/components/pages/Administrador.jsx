@@ -1,11 +1,12 @@
 import { Button, Table } from "react-bootstrap";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 
 const Administrador = () => {
+  const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -14,7 +15,11 @@ const Administrador = () => {
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
+  const [recetas, setRecetas] = useState(recetasLocalStorage);
 
+  useEffect(() => {
+    localStorage.setItem("recetas", JSON.stringify(recetas));
+  }, [recetas]);
   const {
     register,
     handleSubmit,
@@ -38,13 +43,14 @@ const Administrador = () => {
       pasos,
     };
 
-    console.log(recetaCompleta);
+    setRecetas([...recetas, recetaCompleta]);
+
     reset();
     setIngredientes([]);
     setPasos([]);
     setIngrediente("");
     setPaso("");
-    handleClose()
+    handleClose();
   };
 
   const agregarIngrediente = () => {
