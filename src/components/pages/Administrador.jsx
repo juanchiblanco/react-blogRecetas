@@ -5,6 +5,7 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { datosPrueba } from "../../data/datosPrueba";
+import { v4 as uuidv4 } from 'uuid';
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
@@ -132,7 +133,7 @@ const Administrador = () => {
       <Modal show={show}>
         <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title>Agregar receta</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formPlato">
@@ -286,10 +287,10 @@ const Administrador = () => {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formDescripcionBreve">
-              <Form.Label>Tip</Form.Label>
+              <Form.Label>Descripcion breve*</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ej: Si quieres darle un sabor más profundo, puedes añadir un chorrito de vino tinto justo después de dorar la carne y dejar que se evapore antes de agregar el tomate."
+                placeholder="Ej: Pasta clásica italiana con carne y salsa de tomate."
                 as="textarea"
                 {...register("formDescripcionBreve", {
                   required: "La descripcion breve es un dato obligatorio",
@@ -308,10 +309,10 @@ const Administrador = () => {
               </Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formDescripcionAmplia">
-              <Form.Label>Tip</Form.Label>
+              <Form.Label>Descripcion amplia*</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ej: Si quieres darle un sabor más profundo, puedes añadir un chorrito de vino tinto justo después de dorar la carne y dejar que se evapore antes de agregar el tomate."
+                placeholder="Ej: Una receta tradicional y reconfortante de la cocina italiana. Ideal para compartir en familia. Los sabores de la carne y el tomate se mezclan a la perfección con la textura al dente de los spaghetti."
                 as="textarea"
                 {...register("formDescripcionAmplia", {
                   required: "La descripcion amplia es un dato obligatorio",
