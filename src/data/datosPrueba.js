@@ -106,7 +106,7 @@ export const datosPrueba = [
     formPlato: "Arroz con leche",
     formDuracion: 40,
     formPorciones: 6,
-    formImagen: "https://images.pexels.com/photos/6602828/pexels-photo-6602828.jpeg",
+    formImagen: "https://images.pexels.com/photos/116725/pexels-photo-116725.jpeg",
     formDificultad: "baja",
     ingredientes: [
       "1 litro de leche",

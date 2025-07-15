@@ -4,6 +4,7 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
+import { datosPrueba } from "../../data/datosPrueba";
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
@@ -26,6 +27,10 @@ const Administrador = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const cargarRecetasPrueba = () => {
+    setRecetas(datosPrueba)
+  }
 
   const onSubmit = (receta) => {
     if (ingredientes.length === 0 || pasos.length === 0) {
@@ -106,7 +111,7 @@ const Administrador = () => {
             <i className="bi bi-file-earmark-plus"></i>
           </Button>
           <Button className="btn btn-info ms-2">
-            <i className="bi bi-database-fill-add"></i>
+            <i className="bi bi-database-fill-add" onClick={cargarRecetasPrueba}></i>
           </Button>
         </div>
       </div>
