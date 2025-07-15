@@ -285,6 +285,50 @@ const Administrador = () => {
                 {errors.formPasos?.message}
               </Form.Text>
             </Form.Group>
+            <Form.Group className="mb-3" controlId="formDescripcionBreve">
+              <Form.Label>Tip</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ej: Si quieres darle un sabor más profundo, puedes añadir un chorrito de vino tinto justo después de dorar la carne y dejar que se evapore antes de agregar el tomate."
+                as="textarea"
+                {...register("formDescripcionBreve", {
+                  required: "La descripcion breve es un dato obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La descripcion breve debe tener al menos 2 caracteres",
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: "El tip debe tener como maximo 100 caracteres",
+                  },
+                })}
+              />
+              <Form.Text className="text-danger">
+                {errors.formDescripcionBreve?.message}
+              </Form.Text>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="formDescripcionAmplia">
+              <Form.Label>Tip</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ej: Si quieres darle un sabor más profundo, puedes añadir un chorrito de vino tinto justo después de dorar la carne y dejar que se evapore antes de agregar el tomate."
+                as="textarea"
+                {...register("formDescripcionAmplia", {
+                  required: "La descripcion amplia es un dato obligatorio",
+                  minLength: {
+                    value: 2,
+                    message: "La descripcion amplia debe tener al menos 2 caracteres",
+                  },
+                  maxLength: {
+                    value: 300,
+                    message: "La descripcion amplia debe tener como maximo 300 caracteres",
+                  },
+                })}
+              />
+              <Form.Text className="text-danger">
+                {errors.formDescripcionAmplia?.message}
+              </Form.Text>
+            </Form.Group>
             <Form.Group className="mb-3" controlId="formTip">
               <Form.Label>Tip</Form.Label>
               <Form.Control
