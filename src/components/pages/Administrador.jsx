@@ -3,12 +3,17 @@ import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
 
 const Administrador = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [ingrediente, setIngrediente] = useState("");
+  const [paso, setPaso] = useState("");
+  const [ingredientes, setIngredientes] = useState([]);
+  const [pasos, setPasos] = useState([]);
 
   const {
     register,
@@ -18,7 +23,70 @@ const Administrador = () => {
   } = useForm();
 
   const onSubmit = (receta) => {
-    console.log(receta);
+    if (ingredientes.length === 0 || pasos.length === 0) {
+      Swal.fire({
+        title: "Faltan datos",
+        text: "Debes agregar al menos un ingrediente y un paso",
+        icon: "error",
+      });
+      return;
+    }
+
+    const recetaCompleta = {
+      ...receta,
+      ingredientes,
+      pasos,
+    };
+
+    console.log(recetaCompleta);
+    reset();
+    setIngredientes([]);
+    setPasos([]);
+    setIngrediente("");
+    setPaso("");
+    handleClose()
+  };
+
+  const agregarIngrediente = () => {
+    if (ingredientes.length === 0) {
+      setIngredientes([ingrediente]);
+    } else {
+      setIngredientes([...ingredientes, ingrediente]);
+    }
+    Swal.fire({
+      title: "Quieres agregar otro ingrediente?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Agregar otro ingrediente",
+      cancelButtonText: "No quiero agregar mas",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIngrediente("");
+      }
+    });
+  };
+
+  const agregarPaso = () => {
+    if (pasos.length === 0) {
+      setPasos([paso]);
+    } else {
+      setPasos([...pasos, paso]);
+    }
+    Swal.fire({
+      title: "Quieres agregar otro paso?",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Agregar otro paso",
+      cancelButtonText: "No quiero agregar mas",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setPaso("");
+      }
+    });
   };
 
   return (
@@ -165,21 +233,15 @@ const Administrador = () => {
                   className="w-75"
                   type="text"
                   placeholder="Ej: 300 g de carne picada de res."
-                  {...register("formIngredientes", {
-                    required: "La receta debe contener al menos un ingrediente",
-                    minLength: {
-                      value: 2,
-                      message:
-                        "El ingrediente debe tener al menos 2 caracteres",
-                    },
-                    maxLength: {
-                      value: 100,
-                      message:
-                        "El ingrediente debe tener como maximo 100 caracteres",
-                    },
-                  })}
+                  value={ingrediente}
+                  onChange={(e) => setIngrediente(e.target.value)}
                 />
-                <Button type="button" variant="primary" className="w-25">
+                <Button
+                  type="button"
+                  variant="primary"
+                  className="w-25"
+                  onClick={agregarIngrediente}
+                >
                   Agregar ingrediente
                 </Button>
               </div>
@@ -194,19 +256,15 @@ const Administrador = () => {
                   className="w-75"
                   type="text"
                   placeholder="Ej: Cocinar la pasta En una olla con agua hirviendo y sal, cocina los spaghetti según las instrucciones del paquete. Escúrrelos y resérvalos."
-                  {...register("formPasos", {
-                    required: "La receta debe contener al menos un paso",
-                    minLength: {
-                      value: 2,
-                      message: "El paso debe tener al menos 2 caracteres",
-                    },
-                    maxLength: {
-                      value: 200,
-                      message: "El paso debe tener como maximo 200 caracteres",
-                    },
-                  })}
+                  value={paso}
+                  onChange={(e) => setPaso(e.target.value)}
                 />
-                <Button type="button" variant="primary" className="w-25">
+                <Button
+                  type="button"
+                  variant="primary"
+                  className="w-25"
+                  onClick={agregarPaso}
+                >
                   Agregar paso
                 </Button>
               </div>
