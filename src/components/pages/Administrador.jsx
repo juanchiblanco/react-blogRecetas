@@ -139,7 +139,6 @@ const Administrador = () => {
           {
             recetas.map((receta, indice)=> <ItemProducto key={receta.id} receta={receta} fila={indice + 1}></ItemProducto>)
           }
-          <ItemProducto></ItemProducto>
         </tbody>
       </Table>
       <Modal show={show}>
