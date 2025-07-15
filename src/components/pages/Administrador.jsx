@@ -44,24 +44,24 @@ const Administrador = () => {
           <Form className="my-4">
             <Form.Group className="mb-3" controlId="formPlato">
               <Form.Label>Plato*</Form.Label>
-              <Form.Control type="text" placeholder="Ej: Cafe" />
+              <Form.Control type="text" placeholder="Ej: Spaghetti a la boloñesa" />
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formDuracion">
               <Form.Label>Duración en minutos*</Form.Label>
-              <Form.Control type="number" placeholder="Ej: 50" />
+              <Form.Control type="number" placeholder="Ej: 45" />
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formPorciones">
               <Form.Label>Cantidad de porciones*</Form.Label>
-              <Form.Control type="number" placeholder="Ej: 50" />
+              <Form.Control type="number" placeholder="Ej: 4" />
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formImagen">
               <Form.Label>Imagen URL*</Form.Label>
               <Form.Control
                 type="text"
-                placeholder="Ej: https://www.pexels.com/es-es/vans-en-blanco-y-negro-fuera-de-la-decoracion-para-colgar-en-la-pared-1230679/"
+                placeholder="Ej: https://images.pexels.com/photos/116738/pexels-photo-116738.jpeg"
               />
               <Form.Text className="text-danger"></Form.Text>
             </Form.Group>
@@ -81,9 +81,9 @@ const Administrador = () => {
               <Form.Control
               className="w-75"
                 type="text"
-                placeholder="Ej: Una taza de café suave y aromático."
+                placeholder="Ej: 300 g de carne picada de res."
               />
-              <Button type="button" variant="success" className="w-25">
+              <Button type="button" variant="primary" className="w-25">
               Agregar ingrediente
             </Button>
             </div>
@@ -95,9 +95,9 @@ const Administrador = () => {
               <Form.Control
               className="w-75"
                 type="text"
-                placeholder="Ej: Una taza de café suave y aromático."
+                placeholder="Ej: Cocinar la pasta En una olla con agua hirviendo y sal, cocina los spaghetti según las instrucciones del paquete. Escúrrelos y resérvalos."
               />
-              <Button type="button" variant="success" className="w-25">
+              <Button type="button" variant="primary" className="w-25">
               Agregar paso
             </Button>
             </div>
@@ -107,7 +107,7 @@ const Administrador = () => {
           <Form.Label>Consejo adicional</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Ej: Una taza de café suave y aromático."
+            placeholder="Ej: Si quieres darle un sabor más profundo, puedes añadir un chorrito de vino tinto justo después de dorar la carne y dejar que se evapore antes de agregar el tomate."
             as="textarea"
            
           />
@@ -116,11 +116,8 @@ const Administrador = () => {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="success" onClick={handleClose}>
+            Guardar
           </Button>
         </Modal.Footer>
       </Modal>
