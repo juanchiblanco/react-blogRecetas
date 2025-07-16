@@ -293,6 +293,7 @@ const Administrador = () => {
                   placeholder="Ej: 300 g de carne picada de res."
                   value={ingrediente}
                   onChange={(e) => setIngrediente(e.target.value)}
+                  maxLength={80}
                 />
                 <Button
                   type="button"
@@ -332,6 +333,7 @@ const Administrador = () => {
                   placeholder="Ej: Cocinar la pasta En una olla con agua hirviendo y sal, cocina los spaghetti según las instrucciones del paquete. Escúrrelos y resérvalos."
                   value={paso}
                   onChange={(e) => setPaso(e.target.value)}
+                  maxLength={150}
                 />
                 <Button
                   type="button"

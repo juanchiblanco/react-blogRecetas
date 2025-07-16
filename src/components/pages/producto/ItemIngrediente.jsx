@@ -2,7 +2,7 @@ import { Button, ListGroup } from "react-bootstrap";
 
 const ItemIngrediente = ({ ingrediente, borrarIngrediente }) => {
   return (
-    <ListGroup.Item className="d-flex my-2">
+    <ListGroup.Item className="d-flex my-2 text-break">
       {ingrediente}
       <Button
       className="ms-auto btn-sm"
@@ -10,7 +10,7 @@ const ItemIngrediente = ({ ingrediente, borrarIngrediente }) => {
         variant="danger"
         onClick={() => borrarIngrediente(ingrediente)}
       >
-        Borrar
+        <i class="bi bi-trash"></i>
       </Button>
     </ListGroup.Item>
   );
