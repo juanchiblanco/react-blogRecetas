@@ -48,12 +48,14 @@ const ItemProducto = ({receta, fila, borrarReceta}) => {
       </td>
       <td>{receta.formDificultad}</td>
       <td className="text-center">
+        <div className="d-flex gap-1">
         <Button variant="warning" className="me-lg-2">
           <i className="bi bi-pencil-square"></i>
         </Button>
         <Button variant="danger" onClick={eliminarReceta}>
           <i className="bi bi-trash"></i>
         </Button>
+        </div>
       </td>
     </tr>
     );
