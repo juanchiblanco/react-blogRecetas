@@ -5,9 +5,10 @@ import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { datosPrueba } from "../../data/datosPrueba";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import ItemReceta from "./producto/ItemReceta";
 import DetalleReceta from "./DetalleReceta";
+import ItemIngrediente from "./producto/ItemIngrediente";
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
@@ -32,8 +33,8 @@ const Administrador = () => {
   } = useForm();
 
   const cargarRecetasPrueba = () => {
-    setRecetas(datosPrueba)
-  }
+    setRecetas(datosPrueba);
+  };
 
   const onSubmit = (receta) => {
     if (ingredientes.length === 0 || pasos.length === 0) {
@@ -45,7 +46,7 @@ const Administrador = () => {
       return;
     }
 
-    receta.id = uuidv4()
+    receta.id = uuidv4();
 
     const recetaCompleta = {
       ...receta,
@@ -56,10 +57,10 @@ const Administrador = () => {
     setRecetas([...recetas, recetaCompleta]);
 
     Swal.fire({
-  title: "Receta agregada!",
-  text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
-  icon: "success"
-});
+      title: "Receta agregada!",
+      text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
+      icon: "success",
+    });
 
     reset();
     setIngredientes([]);
@@ -112,10 +113,12 @@ const Administrador = () => {
   };
 
   const borrarReceta = (idReceta) => {
-    const recetasFiltradas = recetas.filter((ItemReceta)=> ItemReceta.id!==idReceta)
-    setRecetas(recetasFiltradas)
-    return true
-  }
+    const recetasFiltradas = recetas.filter(
+      (ItemReceta) => ItemReceta.id !== idReceta
+    );
+    setRecetas(recetasFiltradas);
+    return true;
+  };
 
   return (
     <section className="container">
@@ -126,7 +129,10 @@ const Administrador = () => {
             <i className="bi bi-file-earmark-plus"></i>
           </Button>
           <Button className="btn btn-info ms-2">
-            <i className="bi bi-database-fill-add" onClick={cargarRecetasPrueba}></i>
+            <i
+              className="bi bi-database-fill-add"
+              onClick={cargarRecetasPrueba}
+            ></i>
           </Button>
         </div>
       </div>
@@ -143,9 +149,14 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
-          {
-            recetas.map((receta, indice)=> <ItemReceta key={receta.id} receta={receta} fila={indice + 1} borrarReceta={borrarReceta}></ItemReceta>)
-          }
+          {recetas.map((receta, indice) => (
+            <ItemReceta
+              key={receta.id}
+              receta={receta}
+              fila={indice + 1}
+              borrarReceta={borrarReceta}
+            ></ItemReceta>
+          ))}
         </tbody>
       </Table>
       <Modal show={show} onHide={() => setShow(false)}>
@@ -277,6 +288,15 @@ const Administrador = () => {
                   Agregar ingrediente
                 </Button>
               </div>
+              <div>
+                {ingredientes.length === 0 ? (
+                  <p className="text-center mt-4">
+                    No hay ingredientes agregados
+                  </p>
+                ) : (
+                  ingredientes.map((ingrediente, indice) => <ItemIngrediente ingrediente={ingrediente} key={indice}></ItemIngrediente>)
+                )}
+              </div>
               <Form.Text className="text-danger">
                 {errors.formIngredientes?.message}
               </Form.Text>
@@ -314,7 +334,8 @@ const Administrador = () => {
                   required: "La descripcion breve es un dato obligatorio",
                   minLength: {
                     value: 2,
-                    message: "La descripcion breve debe tener al menos 2 caracteres",
+                    message:
+                      "La descripcion breve debe tener al menos 2 caracteres",
                   },
                   maxLength: {
                     value: 100,
@@ -336,11 +357,13 @@ const Administrador = () => {
                   required: "La descripcion amplia es un dato obligatorio",
                   minLength: {
                     value: 2,
-                    message: "La descripcion amplia debe tener al menos 2 caracteres",
+                    message:
+                      "La descripcion amplia debe tener al menos 2 caracteres",
                   },
                   maxLength: {
                     value: 300,
-                    message: "La descripcion amplia debe tener como maximo 300 caracteres",
+                    message:
+                      "La descripcion amplia debe tener como maximo 300 caracteres",
                   },
                 })}
               />
