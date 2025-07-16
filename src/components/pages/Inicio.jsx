@@ -1,5 +1,6 @@
 import { Container, Row } from "react-bootstrap";
 import CardReceta from "./producto/CardReceta";
+import Paginacion from "./Paginacion";
 
 const Inicio = () => {
 
@@ -25,12 +26,13 @@ const Inicio = () => {
           <i className="bi bi-star-fill text-warning fs-3"></i>
         </div>
         <hr />
-        <h4 className="mt-5">Explora una colección de recetas fáciles, sabrosas y para todos los niveles.</h4>
+        <h4 className="mt-5" id="explorar">Explora una colección de recetas fáciles, sabrosas y para todos los niveles.</h4>
         <Row>
           {
             recetasLocalStorage.map((receta)=> <CardReceta receta={receta} key={receta.id}></CardReceta>)
           }
         </Row>
+        <div className="d-flex justify-content-center mt-5"><Paginacion></Paginacion></div>
         </Container>
     </section>
   );
