@@ -71,7 +71,7 @@ const Administrador = () => {
     handleClose();
   };
 
-  const agregarIngrediente = (nuevoIngrediente) => {
+  const agregarIngrediente = () => {
     if (ingredientes.length === 0) {
       setIngredientes([ingrediente]);
     } else {
@@ -348,7 +348,7 @@ const Administrador = () => {
                 ) : (
                   <ol>
                     {pasos.map((paso, indice) => (
-                      <ItemPaso paso={paso} key={indice} borrarPaso={borrarPaso}></ItemPaso>
+                      <ItemPaso paso={paso} key={indice} indice={indice+1} borrarPaso={borrarPaso}></ItemPaso>
                     ))}
                   </ol>
                 )}

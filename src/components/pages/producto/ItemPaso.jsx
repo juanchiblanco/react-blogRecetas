@@ -1,9 +1,9 @@
 import { Button, ListGroup } from "react-bootstrap";
 
-const ItemPaso = ({ paso, borrarPaso }) => {
+const ItemPaso = ({ paso, borrarPaso, indice }) => {
   return (
     <ListGroup.Item className="d-flex my-2">
-      {paso}
+      {indice}. {paso}
       <Button
       className="ms-auto btn-sm"
         type="button"
