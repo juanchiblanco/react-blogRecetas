@@ -6,7 +6,7 @@ import Administrador from "./components/pages/Administrador";
 import Error404 from "./components/pages/Error404";
 import Inicio from "./components/pages/Inicio";
 import Login from "./components/pages/Login";
-import DetalleProducto from "./components/pages/DetalleProducto";
+import DetalleReceta from "./components/pages/DetalleReceta";
 import { useState } from "react";
 import ProtectorAdmin from "./components/ProtectorAdmin";
 
@@ -26,7 +26,7 @@ function App() {
             <Route path="/" element={<Inicio></Inicio>}></Route>
             <Route
               path="/detalle"
-              element={<DetalleProducto></DetalleProducto>}
+              element={<DetalleReceta></DetalleReceta>}
             ></Route>
             <Route
               path="/login"

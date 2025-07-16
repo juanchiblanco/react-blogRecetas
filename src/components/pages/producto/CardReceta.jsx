@@ -20,7 +20,7 @@ const CardReceta = ({receta}) => {
           <Card.Text className="fw-bold text-warning text-center">{receta.formDificultad}</Card.Text>
         </Card.Body>
         <Card.Footer className="text-center">
-          <Link variant="success" className="w-50 btn btn-success" to={'/detalle'}>
+          <Link variant="success" className="w-50 btn btn-success" to={`/detalle.html?id=${receta.id}`}>
             Ver más
           </Link>
         </Card.Footer>

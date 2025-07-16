@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import { datosPrueba } from "../../data/datosPrueba";
 import { v4 as uuidv4 } from 'uuid';
 import ItemReceta from "./producto/ItemReceta";
+import DetalleReceta from "./DetalleReceta";
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];

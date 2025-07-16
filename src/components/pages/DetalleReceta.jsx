@@ -1,6 +1,6 @@
 import { Container, Card, Row, Col } from "react-bootstrap";
 
-const DetalleProducto = () => {
+const DetalleReceta = () => {
     return (
         <Container className="my-3">
       <Card>
@@ -70,4 +70,4 @@ Sirve la pasta caliente con la salsa boloñesa por encima y espolvorea queso par
     );
 };
 
-export default DetalleProducto;
+export default DetalleReceta;
