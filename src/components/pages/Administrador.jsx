@@ -121,6 +121,18 @@ const Administrador = () => {
     return true;
   };
 
+  const borrarIngrediente = (idIngrediente) => {
+    const ingredientesFiltrados = ingredientes.filter((ItemIngrediente)=> ItemIngrediente.id !== idIngrediente)
+    setIngredientes(ingredientesFiltrados);
+    return true;
+  }
+
+  const borrarPaso = (idPaso) => {
+    const pasosFiltrados = pasos.filter((ItemPaso)=> ItemPaso.id !== idPaso)
+    setPasos(pasosFiltrados);
+    return true;
+  }
+
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
