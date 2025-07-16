@@ -276,9 +276,9 @@ const Administrador = () => {
                 })}
               >
                 <option value="">Seleccione una opcion</option>
-                <option value="baja">Baja</option>
-                <option value="media">Media</option>
-                <option value="alta">Alta</option>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
               </Form.Select>
               <Form.Text className="text-danger">
                 {errors.formDificultad?.message}
