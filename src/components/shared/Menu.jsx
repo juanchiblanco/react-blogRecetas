@@ -2,14 +2,32 @@ import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import logo from "../../../public/logoCocina.png";
+import Swal from "sweetalert2";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
 
   const logOut = () => {
+    Swal.fire({
+  title: "Tu sesión se está por cerrar",
+  text: "Estás seguro de esto?",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Cerrar sesión",
+  cancelButtonText: "Cancelar"
+}).then((result) => {
+  if (result.isConfirmed) {
+    Swal.fire({
+      title: "Sesión cerrada",
+      text: "Nos vemos la próxima.",
+    });
     setUsuarioAdmin(false);
     sessionStorage.removeItem("userKey");
     navegacion("/");
+  }
+});
   };
 
   return (

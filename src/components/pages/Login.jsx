@@ -68,7 +68,7 @@ const Login = ({ setUsuarioAdmin }) => {
               </Form.Text>
             </Form.Group>
             <Button variant="success" type="submit">
-              Enviar
+              Iniciar sesión
             </Button>
           </Form>
         </Col>
