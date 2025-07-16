@@ -1,4 +1,4 @@
-import { Button, Table } from "react-bootstrap";
+import { Button, Table, ListGroup } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -71,15 +71,16 @@ const Administrador = () => {
     handleClose();
   };
 
-  const agregarIngrediente = () => {
+  const agregarIngrediente = (nuevoIngrediente) => {
     if (ingredientes.length === 0) {
       setIngredientes([ingrediente]);
     } else {
       setIngredientes([...ingredientes, ingrediente]);
     }
     Swal.fire({
-      title: "Quieres agregar otro ingrediente?",
-      icon: "question",
+      title: "Ingrediente agregado",
+      text: "Quieres agregar otro ingrediente?",
+      icon: "success",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -99,8 +100,9 @@ const Administrador = () => {
       setPasos([...pasos, paso]);
     }
     Swal.fire({
-      title: "Quieres agregar otro paso?",
-      icon: "question",
+      title: "Paso agregado",
+      text:"Quieres agregar otro paso?",
+      icon: "success",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
@@ -121,14 +123,14 @@ const Administrador = () => {
     return true;
   };
 
-  const borrarIngrediente = (idIngrediente) => {
-    const ingredientesFiltrados = ingredientes.filter((ItemIngrediente)=> ItemIngrediente.id !== idIngrediente)
+  const borrarIngrediente = (nuevoIngrediente) => {
+    const ingredientesFiltrados = ingredientes.filter((ItemIngrediente)=> ItemIngrediente !== nuevoIngrediente)
     setIngredientes(ingredientesFiltrados);
     return true;
   }
 
-  const borrarPaso = (idPaso) => {
-    const pasosFiltrados = pasos.filter((ItemPaso)=> ItemPaso.id !== idPaso)
+  const borrarPaso = (nuevoPaso) => {
+    const pasosFiltrados = pasos.filter((ItemPaso)=> ItemPaso !== nuevoPaso)
     setPasos(pasosFiltrados);
     return true;
   }
@@ -307,14 +309,14 @@ const Administrador = () => {
                     No hay ingredientes agregados
                   </p>
                 ) : (
-                  <ul>
+                  <ListGroup>
                     {ingredientes.map((ingrediente, indice) => (
                       <ItemIngrediente
                         ingrediente={ingrediente}
-                        key={indice}
+                        key={indice} borrarIngrediente={borrarIngrediente}
                       ></ItemIngrediente>
                     ))}
-                  </ul>
+                  </ListGroup>
                 )}
               </div>
               <Form.Text className="text-danger">
@@ -346,7 +348,7 @@ const Administrador = () => {
                 ) : (
                   <ol>
                     {pasos.map((paso, indice) => (
-                      <ItemPaso paso={paso} key={indice}></ItemPaso>
+                      <ItemPaso paso={paso} key={indice} borrarPaso={borrarPaso}></ItemPaso>
                     ))}
                   </ol>
                 )}
