@@ -323,7 +323,7 @@ const Administrador = () => {
                 {errors.formIngredientes?.message}
               </Form.Text>
             </Form.Group>
-            <Form.Group className="mb-3" controlId="formPasos">
+            <Form.Group className="mb-2" controlId="formPasos">
               <Form.Label>Pasos a seguir*</Form.Label>
               <div className="d-flex gap-1">
                 <Form.Control
