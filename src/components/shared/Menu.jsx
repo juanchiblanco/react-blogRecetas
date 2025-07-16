@@ -1,6 +1,7 @@
 import { Navbar, Container, Nav, Button } from "react-bootstrap";
 import { Link, NavLink, useNavigate } from "react-router";
 import "bootstrap-icons/font/bootstrap-icons.css";
+import logo from "../../../public/logoCocina.png";
 
 const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
   const navegacion = useNavigate();
@@ -19,8 +20,13 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       <Container>
         <Navbar.Brand as={Link} to={"/"}>
           <div className="d-flex gap-2 mt-2">
-            <p className="lead fs-4">TuReceta</p>
-            <i className="bi bi-fork-knife mt-1"></i>
+            <img
+            src={logo}
+            alt="logo TuReceta"
+            className="img-fluid"
+            width={50}
+          />
+          <p className="lead fs-4 mt-3">TuReceta</p>
           </div>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
