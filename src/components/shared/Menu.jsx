@@ -58,7 +58,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
                 <NavLink className="nav-link" to={"/administrador"}>
                   Administrador
                 </NavLink>
-                <Button className="nav-link" onClick={logOut}>
+                <Button className="nav-link text-start botonLogout" onClick={logOut}>
                   Logout
                 </Button>
               </>

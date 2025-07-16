@@ -26,3 +26,8 @@ main {
   height: 310px;
   width: 100%;
 }
+
+.botonLogout:hover{
+  background-color: rgba(0, 128, 0, 0) !important;
+}
+
