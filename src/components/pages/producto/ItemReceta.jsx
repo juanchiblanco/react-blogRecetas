@@ -17,15 +17,15 @@ const ItemProducto = ({receta, fila, borrarReceta}) => {
   if (result.isConfirmed) {
     if(borrarReceta(receta.id)){
       Swal.fire({
-      title: "Producto eliminado!",
-      text: `El producto ${receta.formPlato} fue eliminado correctamente`,
+      title: "Receta eliminada!",
+      text: `La receta de ${receta.formPlato} fue eliminada correctamente`,
       icon: "success"
     });
     }
     else{
       Swal.fire({
-      title: "Producto eliminado!",
-      text: `El producto ${receta.formPlato} no pudo ser eliminado`,
+      title: "Ocurrió un error!",
+      text: `La receta de ${receta.formPlato} no pudo ser eliminada`,
       icon: "error"
     });
     }
