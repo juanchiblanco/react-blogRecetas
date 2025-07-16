@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 import ItemReceta from "./producto/ItemReceta";
 import DetalleReceta from "./DetalleReceta";
 import ItemIngrediente from "./producto/ItemIngrediente";
+import ItemPaso from "./producto/ItemPaso";
 
 const Administrador = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
@@ -294,7 +295,14 @@ const Administrador = () => {
                     No hay ingredientes agregados
                   </p>
                 ) : (
-                  ingredientes.map((ingrediente, indice) => <ItemIngrediente ingrediente={ingrediente} key={indice}></ItemIngrediente>)
+                  <ul>
+                    {ingredientes.map((ingrediente, indice) => (
+                      <ItemIngrediente
+                        ingrediente={ingrediente}
+                        key={indice}
+                      ></ItemIngrediente>
+                    ))}
+                  </ul>
                 )}
               </div>
               <Form.Text className="text-danger">
@@ -319,6 +327,17 @@ const Administrador = () => {
                 >
                   Agregar paso
                 </Button>
+              </div>
+              <div>
+                {pasos.length === 0 ? (
+                  <p className="text-center mt-4">No hay pasos agregados</p>
+                ) : (
+                  <ol>
+                    {pasos.map((paso, indice) => (
+                      <ItemPaso paso={paso} key={indice}></ItemPaso>
+                    ))}
+                  </ol>
+                )}
               </div>
               <Form.Text className="text-danger">
                 {errors.formPasos?.message}

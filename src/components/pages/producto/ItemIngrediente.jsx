@@ -1,10 +1,5 @@
-
-const ItemIngrediente = ({ingrediente}) => {
-    return (
-        <ul>
-            <li>{ingrediente}</li>
-        </ul>
-    );
+const ItemIngrediente = ({ ingrediente }) => {
+  return <li>{ingrediente}</li>;
 };
 
 export default ItemIngrediente;
