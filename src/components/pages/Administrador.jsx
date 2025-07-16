@@ -110,6 +110,12 @@ const Administrador = () => {
     });
   };
 
+  const borrarReceta = (idReceta) => {
+    const recetasFiltradas = recetas.filter((ItemReceta)=> ItemReceta.id!==idReceta)
+    setRecetas(recetasFiltradas)
+    return true
+  }
+
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
@@ -137,7 +143,7 @@ const Administrador = () => {
         </thead>
         <tbody>
           {
-            recetas.map((receta, indice)=> <ItemReceta key={receta.id} receta={receta} fila={indice + 1}></ItemReceta>)
+            recetas.map((receta, indice)=> <ItemReceta key={receta.id} receta={receta} fila={indice + 1} borrarReceta={borrarReceta}></ItemReceta>)
           }
         </tbody>
       </Table>
