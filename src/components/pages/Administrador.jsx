@@ -147,7 +147,7 @@ const Administrador = () => {
           }
         </tbody>
       </Table>
-      <Modal show={show}>
+      <Modal show={show} onHide={() => setShow(false)}>
         <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
             <Modal.Title>Agregar receta</Modal.Title>
