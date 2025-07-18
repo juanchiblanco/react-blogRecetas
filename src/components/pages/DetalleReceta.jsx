@@ -69,9 +69,7 @@ const DetalleReceta = () => {
                     )))}
               </ListGroup>
               <Card.Text className="my-4 text-center bg-dark-subtle p-2 rounded">
-                Consejo Adicional: Si quieres darle un sabor más profundo,
-                puedes añadir un chorrito de vino tinto justo después de dorar
-                la carne y dejar que se evapore antes de agregar el tomate.
+                Consejo Adicional: {recetaBuscada.formTip}
               </Card.Text>
             </Card.Body>
           </Col>
