@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const ItemProducto = ({receta, fila, borrarReceta}) => {
+const ItemProducto = ({receta, fila, borrarReceta, handleShow, setTitulo}) => {
 
   const eliminarReceta = () => {
      Swal.fire({
@@ -31,8 +31,12 @@ const ItemProducto = ({receta, fila, borrarReceta}) => {
     }
   }
 });
-
   }
+
+  const prepararModal = () => {
+  handleShow()
+  setTitulo('Editar receta')
+}
 
     return (
         <tr>
@@ -49,7 +53,7 @@ const ItemProducto = ({receta, fila, borrarReceta}) => {
       <td>{receta.formDificultad}</td>
       <td className="text-center">
         <div className="d-flex gap-1">
-        <Button variant="warning" className="me-lg-2">
+        <Button variant="warning" className="me-lg-2" onClick={prepararModal}>
           <i className="bi bi-pencil-square"></i>
         </Button>
         <Button variant="danger" onClick={eliminarReceta}>

@@ -16,12 +16,16 @@ const Administrador = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setTitulo('Agregar receta')
+  }
   const [ingrediente, setIngrediente] = useState("");
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
   const [recetas, setRecetas] = useState(recetasLocalStorage);
+  const [titulo, setTitulo] = useState("")
 
   useEffect(() => {
     localStorage.setItem("recetas", JSON.stringify(recetas));
@@ -169,7 +173,7 @@ const Administrador = () => {
               key={receta.id}
               receta={receta}
               fila={indice + 1}
-              borrarReceta={borrarReceta}
+              borrarReceta={borrarReceta} handleShow={handleShow} setTitulo={setTitulo}
             ></ItemReceta>
           ))}
         </tbody>
@@ -177,7 +181,7 @@ const Administrador = () => {
       <Modal show={show} onHide={() => setShow(false)}>
         <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>Agregar receta</Modal.Title>
+            <Modal.Title>{titulo}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formPlato">
