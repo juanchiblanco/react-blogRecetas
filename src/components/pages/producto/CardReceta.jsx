@@ -30,7 +30,7 @@ const CardReceta = ({receta}) => {
           </div>
         </Card.Body>
         <Card.Footer className="text-center">
-          <Link variant="success" className="w-50 btn btn-success" to={`/detalle.html?id=${receta.id}`}>
+          <Link variant="success" className="w-50 btn btn-success" to={`/detalle/${receta.id}`}>
             Ver receta
           </Link>
         </Card.Footer>
