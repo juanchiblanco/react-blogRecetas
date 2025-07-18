@@ -42,7 +42,7 @@ const Administrador = () => {
       setIngredientes(recetaBuscada.ingredientes);
       setPasos(recetaBuscada.pasos);
     }
-  }, [titulo]);
+  }, [titulo, recetas]);
 
   const {
     register,
@@ -57,47 +57,50 @@ const Administrador = () => {
   };
 
   const onSubmit = (receta) => {
-    {if (titulo === "Crear producto") {
-      if (ingredientes.length === 0 || pasos.length === 0) {
+    {
+      if (titulo === "Crear producto") {
+        if (ingredientes.length === 0 || pasos.length === 0) {
+          Swal.fire({
+            title: "Faltan datos",
+            text: "Debes agregar al menos un ingrediente y un paso",
+            icon: "error",
+          });
+          return;
+        }
+
+        receta.id = uuidv4();
+
+        const recetaCompleta = {
+          ...receta,
+          ingredientes,
+          pasos,
+        };
+
+        setRecetas([...recetas, recetaCompleta]);
+
         Swal.fire({
-          title: "Faltan datos",
-          text: "Debes agregar al menos un ingrediente y un paso",
-          icon: "error",
-        });
-        return;
-      }
-
-      receta.id = uuidv4();
-
-      const recetaCompleta = {
-        ...receta,
-        ingredientes,
-        pasos,
-      };
-
-      setRecetas([...recetas, recetaCompleta]);
-
-      Swal.fire({
-        title: "Receta agregada!",
-        text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
-        icon: "success",
-      });
-
-      reset();
-      setIngredientes([]);
-      setPasos([]);
-      setIngrediente("");
-      setPaso("");
-      handleClose();
-    }else{
-      if (editarReceta(recetaID, receta)) {
-        Swal.fire({
-          title: "Receta editada",
-          text: `La receta de ${receta.formPlato} fue editado correctamente.`,
+          title: "Receta agregada!",
+          text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
           icon: "success",
         });
+
+        reset();
+        setIngredientes([]);
+        setPasos([]);
+        setIngrediente("");
+        setPaso("");
+        handleClose();
+      } else {
+        if (editarReceta(recetaID, receta)) {
+          Swal.fire({
+            title: "Receta editada",
+            text: `La receta de ${receta.formPlato} fue editado correctamente.`,
+            icon: "success",
+          });
+        }
       }
-    }}}
+    }
+  };
 
   const agregarIngrediente = () => {
     if (ingredientes.length === 0) {
@@ -172,22 +175,23 @@ const Administrador = () => {
     return recetaBuscada;
   };
 
-  const editarReceta = (idProducto, recetaActualizada) => {
-    const recetasEditadas = recetas.map((itemReceta)=>{
-      if(itemReceta.id===idProducto){
+  const editarReceta = (idReceta, recetaActualizada) => {
+    const recetasEditadas = recetas.map((itemReceta) => {
+      if (itemReceta.id === idReceta) {
         return {
-          ...itemReceta, 
-          ...recetaActualizada
-        }
-      }else{
-        return itemReceta
+          ...itemReceta,
+          ...recetaActualizada,
+          ingredientes: ingredientes,
+          pasos: pasos,
+        };
+      } else {
+        return itemReceta;
       }
-    })
-
-    setRecetas(recetasEditadas)
-    setShow(false)
-    return true
-  }
+    });
+    setRecetas(recetasEditadas);
+    setShow(false);
+    return true;
+  };
 
   return (
     <section className="container">
