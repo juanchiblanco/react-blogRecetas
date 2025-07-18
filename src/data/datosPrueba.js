@@ -5,7 +5,7 @@ export const datosPrueba = [
     formDuracion: 45,
     formPorciones: 4,
     formImagen: "https://images.pexels.com/photos/1279330/pexels-photo-1279330.jpeg",
-    formDificultad: "media",
+    formDificultad: "Media",
     ingredientes: [
       "300 g de carne picada de res",
       "200 g de spaghetti",
@@ -32,7 +32,7 @@ export const datosPrueba = [
     formDuracion: 20,
     formPorciones: 2,
     formImagen: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg",
-    formDificultad: "baja",
+    formDificultad: "Baja",
     ingredientes: [
       "2 pechugas de pollo",
       "Lechuga romana",
@@ -56,7 +56,7 @@ export const datosPrueba = [
     formDuracion: 35,
     formPorciones: 3,
     formImagen: "https://images.pexels.com/photos/461198/pexels-photo-461198.jpeg",
-    formDificultad: "media",
+    formDificultad: "Media",
     ingredientes: [
       "500 g de carne de res",
       "Tortillas de maíz",
@@ -82,7 +82,7 @@ export const datosPrueba = [
     formDuracion: 60,
     formPorciones: 4,
     formImagen: "https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg",
-    formDificultad: "alta",
+    formDificultad: "Alta",
     ingredientes: [
       "500 g de masa para pizza",
       "200 g de salsa de tomate",
@@ -107,7 +107,7 @@ export const datosPrueba = [
   formDuracion: 35,
   formPorciones: 4,
   formImagen: "https://images.pexels.com/photos/5421522/pexels-photo-5421522.jpeg",
-  formDificultad: "baja",
+  formDificultad: "Baja",
   ingredientes: [
     "1 kg de calabaza",
     "1 cebolla",
@@ -134,7 +134,7 @@ export const datosPrueba = [
     formDuracion: 50,
     formPorciones: 4,
     formImagen: "https://images.pexels.com/photos/4439740/pexels-photo-4439740.jpeg",
-    formDificultad: "media",
+    formDificultad: "Media",
     ingredientes: [
       "500 g de pechuga de pollo en cubos",
       "1 cebolla grande picada",
@@ -163,7 +163,7 @@ export const datosPrueba = [
     formDuracion: 25,
     formPorciones: 2,
     formImagen: "https://images.pexels.com/photos/1640770/pexels-photo-1640770.jpeg",
-    formDificultad: "baja",
+    formDificultad: "Baja",
     ingredientes: [
       "1 pechuga de pollo",
       "1 lechuga romana",
@@ -189,7 +189,7 @@ export const datosPrueba = [
     formDuracion: 20,
     formPorciones: 2,
     formImagen: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
-    formDificultad: "baja",
+    formDificultad: "Baja",
     ingredientes: [
       "1 banana madura",
       "1 huevo",
