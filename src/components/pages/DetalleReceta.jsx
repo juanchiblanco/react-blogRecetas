@@ -24,7 +24,7 @@ const DetalleReceta = () => {
             <Card.Img
               src={recetaBuscada.formImagen}
               alt={recetaBuscada.formPlato}
-              className="d-none d-md-block img-fluid"
+              className="d-none d-md-block img-fluid shadow"
             />
             <Card.Text className="px-2 lead text-center my-3 tinos bg-light-subtle rounded shadow">
                   {recetaBuscada.formDescripcionAmplia}"
