@@ -1,19 +1,23 @@
 import { useState, useEffect } from "react";
-import { Container, Card, Row, Col } from "react-bootstrap";
+import { Container, Card, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
 import { Link, useParams } from "react-router";
+import ItemIngrediente from "./producto/ItemIngrediente";
 
 const DetalleReceta = () => {
   const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
   const { id } = useParams();
 
   const [recetaBuscada, setRecetaBuscada] = useState("");
+  const [detalleIngredientes, setDetalleIngredientes] = useState([])
+  const [detallePasos, setDetallePasos] = useState([])
 
   useEffect(() => {
     const recetaEncontrada = recetasLocalStorage.find(
       (itemReceta) => itemReceta.id === id
     );
     setRecetaBuscada(recetaEncontrada);
-    console.log(recetaBuscada);
+    setDetalleIngredientes(recetaEncontrada.ingredientes);
+    setDetallePasos(recetaEncontrada.pasos);
   }, []);
 
   return (
@@ -24,9 +28,9 @@ const DetalleReceta = () => {
             <Card.Img
               src={recetaBuscada.formImagen}
               alt={recetaBuscada.formPlato}
-              className="d-none d-md-block img-fluid shadow"
+              className="d-none d-md-block img-fluid shadow ms-1 mt-1"
             />
-            <Card.Text className="px-2 lead text-center my-3 tinos bg-light-subtle rounded shadow">
+            <Card.Text className="px-2 ms-1 lead text-center my-3 tinos bg-light-subtle rounded shadow">
                   {recetaBuscada.formDescripcionAmplia}"
                 </Card.Text>
           </Col>
@@ -48,52 +52,22 @@ const DetalleReceta = () => {
                 Porciones: {recetaBuscada.formPorciones}
               </Card.Text>
               <hr />
-              <Card.Text className="raleway">Ingredientes</Card.Text>
-              <ul className="my-2 raleway">
-                <li>400 g de spaghetti</li>
-                <li>300 g de carne picada de res</li>
-                <li>1 cebolla mediana</li>
-                <li>2 dientes de ajo</li>
-                <li>400 g de tomate triturado</li>
-                <li>2 cucharadas de puré de tomate</li>
-                <li>2 cucharadas de aceite de oliva</li>
-                <li>Sal y pimienta al gusto</li>
-                <li>Orégano seco o albahaca</li>
-                <li>Queso parmesano rallado</li>
-              </ul>
-              <hr />
-              <Card.Text className="raleway">Pasos</Card.Text>
-              <ol className="my-2 raleway">
-                <li className="mt-3">
-                  Cocinar la pasta En una olla con agua hirviendo y sal, cocina
-                  los spaghetti según las instrucciones del paquete. Escúrrelos
-                  y resérvalos.
-                </li>
-                <li className="mt-3">
-                  Preparar la salsa En una sartén grande, calienta el aceite de
-                  oliva a fuego medio. Agrega la cebolla y el ajo, y sofríe
-                  hasta que estén blandos y fragantes.
-                </li>
-                <li className="mt-3">
-                  Agregar la carne Añade la carne picada y cocínala hasta que
-                  esté completamente dorada, deshaciéndola con una cuchara de
-                  madera para evitar grumos.
-                </li>
-                <li className="mt-3">
-                  Incorporar el tomate Agrega el tomate triturado y el puré de
-                  tomate (si usas). Salpimienta al gusto. Añade orégano o
-                  albahaca si te gusta el toque herbal.
-                </li>
-                <li className="mt-3">
-                  Cocinar a fuego lento Reduce el fuego y deja cocinar la salsa
-                  durante unos 20–25 minutos, revolviendo ocasionalmente.
-                </li>
-                <li className="mt-3">
-                  Servir Sirve la pasta caliente con la salsa boloñesa por
-                  encima y espolvorea queso parmesano al gusto.
-                </li>
-                <li className="mt-3">2 cucharadas de aceite de oliva.</li>
-              </ol>
+              <Card.Text className="raleway mt-3">Ingredientes</Card.Text>
+              <ListGroup>
+                {detalleIngredientes.map(((ingrediente, indice) => (
+                      <ListGroup.Item
+                        key={indice}
+                      >{ingrediente}</ListGroup.Item>
+                    )))}
+              </ListGroup>
+              <Card.Text className="raleway mt-3">Pasos</Card.Text>
+              <ListGroup>
+                {detallePasos.map(((paso, indice) => (
+                      <ListGroup.Item
+                        key={indice}
+                      >{indice+1}. {paso}</ListGroup.Item>
+                    )))}
+              </ListGroup>
               <Card.Text className="my-4 text-center bg-dark-subtle p-2 rounded">
                 Consejo Adicional: Si quieres darle un sabor más profundo,
                 puedes añadir un chorrito de vino tinto justo después de dorar
