@@ -17,31 +17,32 @@ const Administrador = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => {
     setShow(true);
-    setTitulo('Agregar receta')
-  }
+    setTitulo("Agregar receta");
+  };
   const [ingrediente, setIngrediente] = useState("");
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
   const [recetas, setRecetas] = useState(recetasLocalStorage);
-  const [titulo, setTitulo] = useState("")
-  const [recetaID, setRecetaID] = useState("")
+  const [titulo, setTitulo] = useState("");
+  const [recetaID, setRecetaID] = useState("");
 
   useEffect(() => {
     localStorage.setItem("recetas", JSON.stringify(recetas));
     if (titulo === "Editar receta") {
       const recetaBuscada = buscarReceta(recetaID);
-       setValue("formPlato", recetaBuscada.formPlato);
-    setValue("formDuracion", recetaBuscada.formDuracion);
-    setValue("formPorciones", recetaBuscada.formPorciones);
-    setValue("formImagen", recetaBuscada.formImagen);
-    setValue("formDificultad", recetaBuscada.formDificultad);
-    setValue("formTip", recetaBuscada.formTip);
-    setValue("formDescripcionBreve", recetaBuscada.formDescripcionBreve);
-    setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
-    setIngredientes(recetaBuscada.ingredientes);
-    setPasos(recetaBuscada.pasos)}
-  }, [titulo]);
+      setValue("formPlato", recetaBuscada.formPlato);
+      setValue("formDuracion", recetaBuscada.formDuracion);
+      setValue("formPorciones", recetaBuscada.formPorciones);
+      setValue("formImagen", recetaBuscada.formImagen);
+      setValue("formDificultad", recetaBuscada.formDificultad);
+      setValue("formTip", recetaBuscada.formTip);
+      setValue("formDescripcionBreve", recetaBuscada.formDescripcionBreve);
+      setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
+      setIngredientes(recetaBuscada.ingredientes);
+      setPasos(recetaBuscada.pasos);
+    }
+  }, [titulo, recetas]);
 
   const {
     register,
@@ -51,43 +52,54 @@ const Administrador = () => {
     formState: { errors },
   } = useForm();
 
-
   const cargarRecetasPrueba = () => {
     setRecetas(datosPrueba);
   };
 
   const onSubmit = (receta) => {
-    if (ingredientes.length === 0 || pasos.length === 0) {
-      Swal.fire({
-        title: "Faltan datos",
-        text: "Debes agregar al menos un ingrediente y un paso",
-        icon: "error",
-      });
-      return;
+    {
+      if (titulo === "Crear producto") {
+        if (ingredientes.length === 0 || pasos.length === 0) {
+          Swal.fire({
+            title: "Faltan datos",
+            text: "Debes agregar al menos un ingrediente y un paso",
+            icon: "error",
+          });
+          return;
+        }
+
+        receta.id = uuidv4();
+
+        const recetaCompleta = {
+          ...receta,
+          ingredientes,
+          pasos,
+        };
+
+        setRecetas([...recetas, recetaCompleta]);
+
+        Swal.fire({
+          title: "Receta agregada!",
+          text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
+          icon: "success",
+        });
+
+        reset();
+        setIngredientes([]);
+        setPasos([]);
+        setIngrediente("");
+        setPaso("");
+        handleClose();
+      } else {
+        if (editarReceta(recetaID, receta)) {
+          Swal.fire({
+            title: "Receta editada",
+            text: `La receta de ${receta.formPlato} fue editado correctamente.`,
+            icon: "success",
+          });
+        }
+      }
     }
-
-    receta.id = uuidv4();
-
-    const recetaCompleta = {
-      ...receta,
-      ingredientes,
-      pasos,
-    };
-
-    setRecetas([...recetas, recetaCompleta]);
-
-    Swal.fire({
-      title: "Receta agregada!",
-      text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
-      icon: "success",
-    });
-
-    reset();
-    setIngredientes([]);
-    setPasos([]);
-    setIngrediente("");
-    setPaso("");
-    handleClose();
   };
 
   const agregarIngrediente = () => {
@@ -120,7 +132,7 @@ const Administrador = () => {
     }
     Swal.fire({
       title: "Paso agregado",
-      text:"Quieres agregar otro paso?",
+      text: "Quieres agregar otro paso?",
       icon: "success",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
@@ -143,23 +155,43 @@ const Administrador = () => {
   };
 
   const borrarIngrediente = (nuevoIngrediente) => {
-    const ingredientesFiltrados = ingredientes.filter((ItemIngrediente)=> ItemIngrediente !== nuevoIngrediente)
+    const ingredientesFiltrados = ingredientes.filter(
+      (ItemIngrediente) => ItemIngrediente !== nuevoIngrediente
+    );
     setIngredientes(ingredientesFiltrados);
     return true;
-  }
+  };
 
   const borrarPaso = (nuevoPaso) => {
-    const pasosFiltrados = pasos.filter((ItemPaso)=> ItemPaso !== nuevoPaso)
+    const pasosFiltrados = pasos.filter((ItemPaso) => ItemPaso !== nuevoPaso);
     setPasos(pasosFiltrados);
     return true;
-  }
+  };
 
   const buscarReceta = () => {
     const recetaBuscada = recetas.find(
       (itemReceta) => itemReceta.id === recetaID
     );
     return recetaBuscada;
-  }
+  };
+
+  const editarReceta = (idReceta, recetaActualizada) => {
+    const recetasEditadas = recetas.map((itemReceta) => {
+      if (itemReceta.id === idReceta) {
+        return {
+          ...itemReceta,
+          ...recetaActualizada,
+          ingredientes: ingredientes,
+          pasos: pasos,
+        };
+      } else {
+        return itemReceta;
+      }
+    });
+    setRecetas(recetasEditadas);
+    setShow(false);
+    return true;
+  };
 
   return (
     <section className="container">
@@ -195,7 +227,10 @@ const Administrador = () => {
               key={receta.id}
               receta={receta}
               fila={indice + 1}
-              borrarReceta={borrarReceta} handleShow={handleShow} setTitulo={setTitulo} setRecetaID={setRecetaID}
+              borrarReceta={borrarReceta}
+              handleShow={handleShow}
+              setTitulo={setTitulo}
+              setRecetaID={setRecetaID}
             ></ItemReceta>
           ))}
         </tbody>
@@ -340,7 +375,8 @@ const Administrador = () => {
                     {ingredientes.map((ingrediente, indice) => (
                       <ItemIngrediente
                         ingrediente={ingrediente}
-                        key={indice} borrarIngrediente={borrarIngrediente}
+                        key={indice}
+                        borrarIngrediente={borrarIngrediente}
                       ></ItemIngrediente>
                     ))}
                   </ListGroup>
@@ -376,7 +412,12 @@ const Administrador = () => {
                 ) : (
                   <ol>
                     {pasos.map((paso, indice) => (
-                      <ItemPaso paso={paso} key={indice} indice={indice+1} borrarPaso={borrarPaso}></ItemPaso>
+                      <ItemPaso
+                        paso={paso}
+                        key={indice}
+                        indice={indice + 1}
+                        borrarPaso={borrarPaso}
+                      ></ItemPaso>
                     ))}
                   </ol>
                 )}
