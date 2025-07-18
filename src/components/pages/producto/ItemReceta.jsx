@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
 
-const ItemProducto = ({receta, fila, borrarReceta, handleShow, setTitulo}) => {
+const ItemProducto = ({receta, fila, borrarReceta, handleShow, setTitulo, setRecetaID}) => {
 
   const eliminarReceta = () => {
      Swal.fire({
@@ -36,6 +36,7 @@ const ItemProducto = ({receta, fila, borrarReceta, handleShow, setTitulo}) => {
   const prepararModal = () => {
   handleShow()
   setTitulo('Editar receta')
+  setRecetaID(receta.id)
 }
 
     return (
