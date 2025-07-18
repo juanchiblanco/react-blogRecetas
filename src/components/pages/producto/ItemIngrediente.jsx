@@ -10,7 +10,7 @@ const ItemIngrediente = ({ ingrediente, borrarIngrediente }) => {
         variant="danger"
         onClick={() => borrarIngrediente(ingrediente)}
       >
-        <i class="bi bi-trash"></i>
+        <i className="bi bi-trash"></i>
       </Button>
     </ListGroup.Item>
   );

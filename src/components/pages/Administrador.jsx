@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 import { datosPrueba } from "../../data/datosPrueba";
 import { v4 as uuidv4 } from "uuid";
 import ItemReceta from "./producto/ItemReceta";
-import DetalleReceta from "./DetalleReceta";
 import ItemIngrediente from "./producto/ItemIngrediente";
 import ItemPaso from "./producto/ItemPaso";
 
@@ -16,22 +15,42 @@ const Administrador = () => {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleShow = () => {
+    setShow(true);
+    setTitulo('Agregar receta')
+  }
   const [ingrediente, setIngrediente] = useState("");
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
   const [recetas, setRecetas] = useState(recetasLocalStorage);
+  const [titulo, setTitulo] = useState("")
+  const [recetaID, setRecetaID] = useState("")
 
   useEffect(() => {
     localStorage.setItem("recetas", JSON.stringify(recetas));
-  }, [recetas]);
+    if (titulo === "Editar receta") {
+      const recetaBuscada = buscarReceta(recetaID);
+       setValue("formPlato", recetaBuscada.formPlato);
+    setValue("formDuracion", recetaBuscada.formDuracion);
+    setValue("formPorciones", recetaBuscada.formPorciones);
+    setValue("formImagen", recetaBuscada.formImagen);
+    setValue("formDificultad", recetaBuscada.formDificultad);
+    setValue("formTip", recetaBuscada.formTip);
+    setValue("formDescripcionBreve", recetaBuscada.formDescripcionBreve);
+    setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
+    setIngredientes(recetaBuscada.ingredientes);
+    setPasos(recetaBuscada.pasos)}
+  }, [titulo]);
+
   const {
     register,
     handleSubmit,
     reset,
+    setValue,
     formState: { errors },
   } = useForm();
+
 
   const cargarRecetasPrueba = () => {
     setRecetas(datosPrueba);
@@ -135,6 +154,13 @@ const Administrador = () => {
     return true;
   }
 
+  const buscarReceta = () => {
+    const recetaBuscada = recetas.find(
+      (itemReceta) => itemReceta.id === recetaID
+    );
+    return recetaBuscada;
+  }
+
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
@@ -169,7 +195,7 @@ const Administrador = () => {
               key={receta.id}
               receta={receta}
               fila={indice + 1}
-              borrarReceta={borrarReceta}
+              borrarReceta={borrarReceta} handleShow={handleShow} setTitulo={setTitulo} setRecetaID={setRecetaID}
             ></ItemReceta>
           ))}
         </tbody>
@@ -177,7 +203,7 @@ const Administrador = () => {
       <Modal show={show} onHide={() => setShow(false)}>
         <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>
-            <Modal.Title>Agregar receta</Modal.Title>
+            <Modal.Title>{titulo}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             <Form.Group className="mb-3" controlId="formPlato">

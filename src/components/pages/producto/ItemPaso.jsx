@@ -10,7 +10,7 @@ const ItemPaso = ({ paso, borrarPaso, indice }) => {
         variant="danger"
         onClick={() => borrarPaso(paso)}
       >
-        <i class="bi bi-trash"></i>
+        <i className="bi bi-trash"></i>
       </Button>
     </ListGroup.Item>
   );
