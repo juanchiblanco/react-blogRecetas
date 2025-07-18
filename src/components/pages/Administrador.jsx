@@ -172,6 +172,23 @@ const Administrador = () => {
     return recetaBuscada;
   };
 
+  const editarReceta = (idProducto, recetaActualizada) => {
+    const recetasEditadas = recetas.map((itemReceta)=>{
+      if(itemReceta.id===idProducto){
+        return {
+          ...itemReceta, 
+          ...recetaActualizada
+        }
+      }else{
+        return itemReceta
+      }
+    })
+
+    setRecetas(recetasEditadas)
+    setShow(false)
+    return true
+  }
+
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
