@@ -15,6 +15,7 @@ export const datosPrueba = [
       "Aceite de oliva",
       "Sal y pimienta al gusto"
     ],
+      destacada: true,
     pasos: [
       "Cocina los spaghetti según las instrucciones del paquete.",
       "En una sartén, sofríe la cebolla y el ajo con aceite de oliva.",
@@ -24,7 +25,8 @@ export const datosPrueba = [
     ],
     formTip: "Agrega un poco de vino tinto para realzar el sabor.",
     formDescripcionBreve: "Pasta clásica italiana con carne y salsa de tomate.",
-    formDescripcionAmplia: "Una receta tradicional y reconfortante de la cocina italiana. Ideal para compartir en familia. Los sabores de la carne y el tomate se mezclan a la perfección con la textura al dente de los spaghetti."
+    formDescripcionAmplia: "Una receta tradicional y reconfortante de la cocina italiana. Ideal para compartir en familia. Los sabores de la carne y el tomate se mezclan a la perfección con la textura al dente de los spaghetti.",
+      destacada: false,
   },
   {
     id: "2",
@@ -48,7 +50,8 @@ export const datosPrueba = [
     ],
     formTip: "Puedes añadir un huevo pochado para hacerla más completa.",
     formDescripcionBreve: "Ensalada fresca con pollo a la plancha y aderezo César.",
-    formDescripcionAmplia: "Esta ensalada es una opción ligera y deliciosa. El pollo aporta proteína, el queso le da un toque salado y los croutons agregan textura crujiente. Perfecta para el almuerzo."
+    formDescripcionAmplia: "Esta ensalada es una opción ligera y deliciosa. El pollo aporta proteína, el queso le da un toque salado y los croutons agregan textura crujiente. Perfecta para el almuerzo.",
+      destacada: false,
   },
   {
     id: "3",
@@ -74,7 +77,8 @@ export const datosPrueba = [
     ],
     formTip: "Marina la carne con jugo de naranja y ajo para más sabor.",
     formDescripcionBreve: "Tacos tradicionales mexicanos con carne a la parrilla.",
-    formDescripcionAmplia: "Estos tacos son un clásico de la comida callejera mexicana. Jugosos, sabrosos y fáciles de preparar en casa para cualquier ocasión."
+    formDescripcionAmplia: "Estos tacos son un clásico de la comida callejera mexicana. Jugosos, sabrosos y fáciles de preparar en casa para cualquier ocasión.",
+      destacada: false,
   },
   {
     id: "4",
@@ -99,7 +103,8 @@ export const datosPrueba = [
     ],
     formTip: "Usa mozzarella fresca para un sabor auténtico.",
     formDescripcionBreve: "Pizza italiana con salsa de tomate, queso y albahaca.",
-    formDescripcionAmplia: "La pizza margarita es un emblema de la cocina napolitana. Con pocos ingredientes, resalta por su sabor auténtico y su sencillez."
+    formDescripcionAmplia: "La pizza margarita es un emblema de la cocina napolitana. Con pocos ingredientes, resalta por su sabor auténtico y su sencillez.",
+      destacada: false,
   },
   {
   id: "5",
@@ -126,7 +131,8 @@ export const datosPrueba = [
   ],
   formTip: "Podés decorar con semillas de calabaza tostadas o un chorrito de aceite de oliva.",
   formDescripcionBreve: "Una sopa cremosa, reconfortante y fácil de preparar.",
-  formDescripcionAmplia: "La crema de calabaza es ideal para los días fríos. Su textura suave y su sabor dulce y salado la hacen perfecta como entrada o plato principal. Además, es muy saludable y apta para vegetarianos si omitís la crema de leche o la reemplazás por una opción vegetal."
+  formDescripcionAmplia: "La crema de calabaza es ideal para los días fríos. Su textura suave y su sabor dulce y salado la hacen perfecta como entrada o plato principal. Además, es muy saludable y apta para vegetarianos si omitís la crema de leche o la reemplazás por una opción vegetal.",
+      destacada: false,
 },
   {
     id: "6",
@@ -155,7 +161,8 @@ export const datosPrueba = [
     ],
     formTip: "Agrega unas hojas de cilantro fresco justo antes de servir para un toque aromático.",
     formDescripcionBreve: "Pollo en salsa de curry cremosa, acompañado de arroz aromático.",
-    formDescripcionAmplia: "Este plato combina el sabor exótico del curry con la suavidad de la leche de coco. El arroz basmati aporta textura y aroma, convirtiendo esta receta en una excelente opción para una comida nutritiva y con mucho sabor."
+    formDescripcionAmplia: "Este plato combina el sabor exótico del curry con la suavidad de la leche de coco. El arroz basmati aporta textura y aroma, convirtiendo esta receta en una excelente opción para una comida nutritiva y con mucho sabor.",
+      destacada: false,
   },
   {
     id: "7",
@@ -181,7 +188,8 @@ export const datosPrueba = [
     ],
     formTip: "Puedes añadir un huevo cocido para más proteína.",
     formDescripcionBreve: "Ensalada fresca y completa con pollo, parmesano y aderezo César.",
-    formDescripcionAmplia: "Una receta ligera, ideal para almuerzos rápidos pero nutritivos. La pechuga de pollo aporta proteína mientras que los croutones y el aderezo César dan textura y sabor. Una comida equilibrada y deliciosa en menos de 30 minutos."
+    formDescripcionAmplia: "Una receta ligera, ideal para almuerzos rápidos pero nutritivos. La pechuga de pollo aporta proteína mientras que los croutones y el aderezo César dan textura y sabor. Una comida equilibrada y deliciosa en menos de 30 minutos.",
+      destacada: false,
   },
   {
     id: "8",
@@ -206,6 +214,7 @@ export const datosPrueba = [
     ],
     formTip: "Puedes acompañarlos con miel, frutas o yogur.",
     formDescripcionBreve: "Panqueques nutritivos y sin azúcar, perfectos para el desayuno.",
-    formDescripcionAmplia: "Estos panqueques son una alternativa saludable y deliciosa para comenzar el día. Sin harina ni azúcar, se preparan en minutos y son ideales para quienes buscan un desayuno balanceado, energético y sabroso."
+    formDescripcionAmplia: "Estos panqueques son una alternativa saludable y deliciosa para comenzar el día. Sin harina ni azúcar, se preparan en minutos y son ideales para quienes buscan un desayuno balanceado, energético y sabroso.",
+      destacada: false,
   }
 ]
