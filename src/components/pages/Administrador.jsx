@@ -4,33 +4,55 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { datosPrueba } from "../../data/datosPrueba";
-import { v4 as uuidv4 } from "uuid";
 import ItemReceta from "./producto/ItemReceta";
 import ItemIngrediente from "./producto/ItemIngrediente";
 import ItemPaso from "./producto/ItemPaso";
+import {
+  crearReceta,
+  editarReceta,
+  leerRecetas,
+  obtenerRecetaID,
+} from "../../helpers/queries.js";
+import { useNavigate, useParams } from "react-router";
 
 const Administrador = () => {
-  const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
-  const [show, setShow] = useState(false);
+  const [listaRecetas, setListaRecetas] = useState([]);
 
-  const handleClose = () => setShow(false);
+  const navegacion = useNavigate();
+
+  useEffect(() => {
+    obtenerRecetas();
+  }, []);
+
+  const { id } = useParams();
+
+  const obtenerRecetas = async () => {
+    const respuesta = await leerRecetas();
+    if (respuesta.status === 200) {
+      const datos = await respuesta.json();
+      setListaRecetas(datos);
+    } else {
+      console.info("Ocurrio un error al buscar las recetas");
+    }
+  };
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => {
     setShow(true);
-    setTitulo("Agregar receta");
   };
   const [ingrediente, setIngrediente] = useState("");
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
-  const [recetas, setRecetas] = useState(recetasLocalStorage);
   const [titulo, setTitulo] = useState("");
-  const [recetaID, setRecetaID] = useState("");
 
-  useEffect(() => {
-    localStorage.setItem("recetas", JSON.stringify(recetas));
-    if (titulo === "Editar receta") {
-      const recetaBuscada = buscarReceta(recetaID);
+  const prepararModal = async (id) => {
+    const respuesta = await obtenerRecetaID(id);
+    if (respuesta.status === 200) {
+      const recetaBuscada = await respuesta.json();
       setValue("formPlato", recetaBuscada.formPlato);
       setValue("formDuracion", recetaBuscada.formDuracion);
       setValue("formPorciones", recetaBuscada.formPorciones);
@@ -41,8 +63,17 @@ const Administrador = () => {
       setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
       setIngredientes(recetaBuscada.ingredientes);
       setPasos(recetaBuscada.pasos);
+      setValue("_id", recetaBuscada._id);
+
+      setTitulo("Editar receta");
+      handleShow();
     }
-  }, [titulo, recetas]);
+  };
+
+  const prepararCrearReceta = () => {
+    handleShow();
+    setTitulo("Agregar receta");
+  };
 
   const {
     register,
@@ -52,52 +83,35 @@ const Administrador = () => {
     formState: { errors },
   } = useForm();
 
-  const cargarRecetasPrueba = () => {
-    setRecetas(datosPrueba);
-  };
-
-  const onSubmit = (receta) => {
-    {
-      if (titulo === "Crear producto") {
-        if (ingredientes.length === 0 || pasos.length === 0) {
-          Swal.fire({
-            title: "Faltan datos",
-            text: "Debes agregar al menos un ingrediente y un paso",
-            icon: "error",
-          });
-          return;
-        }
-
-        receta.id = uuidv4();
-
-        const recetaCompleta = {
-          ...receta,
-          ingredientes,
-          pasos,
-        };
-
-        setRecetas([...recetas, recetaCompleta]);
-
+  const onSubmit = async (receta) => {
+    const recetaFinal = { ...receta, ingredientes, pasos };
+    if (titulo === "Agregar receta") {
+      const respuesta = await crearReceta(recetaFinal);
+      if (respuesta.status === 201) {
         Swal.fire({
-          title: "Receta agregada!",
-          text: `La receta de ${receta.formPlato} fue agregada correctamente.`,
+          title: "Receta creada!",
+          text: `La receta ${receta.formPlato} fue creada correctacmente`,
           icon: "success",
         });
-
+        await obtenerRecetas();
         reset();
         setIngredientes([]);
         setPasos([]);
-        setIngrediente("");
-        setPaso("");
         handleClose();
-      } else {
-        if (editarReceta(recetaID, receta)) {
-          Swal.fire({
-            title: "Receta editada",
-            text: `La receta de ${receta.formPlato} fue editado correctamente.`,
-            icon: "success",
-          });
-        }
+      }
+    } else {
+      const respuesta = await editarReceta(recetaFinal, receta._id);
+      if (respuesta.status === 200) {
+        Swal.fire({
+          title: "Receta editada",
+          text: `La receta ${receta.formPlato} fue actualizada correctamente.`,
+          icon: "success",
+        });
+        await obtenerRecetas();
+        reset();
+        setIngredientes([]);
+        setPasos([]);
+        handleClose();
       }
     }
   };
@@ -146,14 +160,6 @@ const Administrador = () => {
     });
   };
 
-  const borrarReceta = (idReceta) => {
-    const recetasFiltradas = recetas.filter(
-      (ItemReceta) => ItemReceta.id !== idReceta
-    );
-    setRecetas(recetasFiltradas);
-    return true;
-  };
-
   const borrarIngrediente = (nuevoIngrediente) => {
     const ingredientesFiltrados = ingredientes.filter(
       (ItemIngrediente) => ItemIngrediente !== nuevoIngrediente
@@ -168,44 +174,13 @@ const Administrador = () => {
     return true;
   };
 
-  const buscarReceta = () => {
-    const recetaBuscada = recetas.find(
-      (itemReceta) => itemReceta.id === recetaID
-    );
-    return recetaBuscada;
-  };
-
-  const editarReceta = (idReceta, recetaActualizada) => {
-    const recetasEditadas = recetas.map((itemReceta) => {
-      if (itemReceta.id === idReceta) {
-        return {
-          ...itemReceta,
-          ...recetaActualizada,
-          ingredientes: ingredientes,
-          pasos: pasos,
-        };
-      } else {
-        return itemReceta;
-      }
-    });
-    setRecetas(recetasEditadas);
-    setShow(false);
-    return true;
-  };
-
   return (
     <section className="container">
       <div className="d-flex justify-content-between align-items-center mt-5">
         <h1 className="display-4 tinos">Mis Recetas</h1>
         <div>
-          <Button className="btn btn-success" onClick={handleShow}>
+          <Button className="btn btn-success" onClick={prepararCrearReceta}>
             <i className="bi bi-file-earmark-plus"></i>
-          </Button>
-          <Button className="btn btn-info ms-2">
-            <i
-              className="bi bi-database-fill-add"
-              onClick={cargarRecetasPrueba}
-            ></i>
           </Button>
         </div>
       </div>
@@ -222,15 +197,15 @@ const Administrador = () => {
           </tr>
         </thead>
         <tbody>
-          {recetas.map((receta, indice) => (
+          {listaRecetas.map((receta, indice) => (
             <ItemReceta
-              key={receta.id}
+              key={receta._id}
               receta={receta}
               fila={indice + 1}
-              borrarReceta={borrarReceta}
               handleShow={handleShow}
               setTitulo={setTitulo}
-              setRecetaID={setRecetaID}
+              setListaRecetas={setListaRecetas}
+              prepararModal={prepararModal}
             ></ItemReceta>
           ))}
         </tbody>

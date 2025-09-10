@@ -1,75 +1,78 @@
 import { useState, useEffect } from "react";
-import { Container, Card, Row, Col, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Container, Card, Row, Col, ListGroup } from "react-bootstrap";
 import { Link, useParams } from "react-router";
-import ItemIngrediente from "./producto/ItemIngrediente";
+import { obtenerRecetaID } from "../../helpers/queries";
 
 const DetalleReceta = () => {
-  const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
+  useEffect(() => {
+    obtenerReceta();
+  }, []);
+
   const { id } = useParams();
 
-  const [recetaBuscada, setRecetaBuscada] = useState("");
-  const [detalleIngredientes, setDetalleIngredientes] = useState([])
-  const [detallePasos, setDetallePasos] = useState([])
+  const [receta, setReceta] = useState('');
 
-  useEffect(() => {
-    const recetaEncontrada = recetasLocalStorage.find(
-      (itemReceta) => itemReceta.id === id
-    );
-    setRecetaBuscada(recetaEncontrada);
-    setDetalleIngredientes(recetaEncontrada.ingredientes);
-    setDetallePasos(recetaEncontrada.pasos);
-  }, []);
+  const obtenerReceta = async () => {
+    const respuesta = await obtenerRecetaID(id);
+    if (respuesta.status === 200) {
+      const receta = await respuesta.json();
+      setReceta(receta);
+    } else {
+      console.info("Ocurrio un error al buscar la receta");
+    }
+  };
 
   return (
     <Container className="my-3">
-      <Card>
+      <Link className="text-decoration-none text-light" to={`/`}>
+            Volver atrás
+          </Link>
+      <Card className="mt-2">
         <Row>
           <Col md={6}>
             <Card.Img
-              src={recetaBuscada.formImagen}
-              alt={recetaBuscada.formPlato}
+              src={receta.formImagen}
+              alt={receta.formPlato}
               className="d-none d-md-block img-fluid shadow ms-1 mt-1"
             />
             <Card.Text className="px-2 ms-1 lead text-center my-3 tinos bg-light-subtle rounded shadow">
-                  {recetaBuscada.formDescripcionAmplia}"
-                </Card.Text>
+              {receta.formDescripcionAmplia}
+            </Card.Text>
           </Col>
           <Col md={6}>
             <Card.Body>
               <div className="d-flex">
                 <Card.Title className="tinos fs-2">
-                  {recetaBuscada.formPlato}
+                  {receta.formPlato}
                 </Card.Title>
                 <Card.Text className="ms-auto display-6">
-                  {recetaBuscada.formDuracion}"
+                  {receta.formDuracion}"
                 </Card.Text>
               </div>
               <hr />
               <Card.Text className="text-warning raleway text-center">
-                Dificultad: {recetaBuscada.formDificultad}
+                Dificultad: {receta.formDificultad}
               </Card.Text>
               <Card.Text className="text-warning raleway text-center">
-                Porciones: {recetaBuscada.formPorciones}
+                Porciones: {receta.formPorciones}
               </Card.Text>
               <hr />
               <Card.Text className="raleway mt-3">Ingredientes</Card.Text>
               <ListGroup>
-                {detalleIngredientes.map(((ingrediente, indice) => (
-                      <ListGroup.Item
-                        key={indice}
-                      >{ingrediente}</ListGroup.Item>
-                    )))}
+                {receta?.ingredientes?.map((ingrediente, indice) => (
+                  <ListGroup.Item key={indice}>{ingrediente}</ListGroup.Item>
+                ))}
               </ListGroup>
               <Card.Text className="raleway mt-3">Pasos</Card.Text>
               <ListGroup>
-                {detallePasos.map(((paso, indice) => (
-                      <ListGroup.Item
-                        key={indice}
-                      >{indice+1}. {paso}</ListGroup.Item>
-                    )))}
+                {receta?.pasos?.map((paso, indice) => (
+                  <ListGroup.Item key={indice}>
+                    {indice + 1}. {paso}
+                  </ListGroup.Item>
+                ))}
               </ListGroup>
               <Card.Text className="my-4 text-center bg-dark-subtle p-2 rounded">
-                Consejo Adicional: {recetaBuscada.formTip}
+                Consejo Adicional: {receta.formTip}
               </Card.Text>
             </Card.Body>
           </Col>

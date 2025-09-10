@@ -1,9 +1,25 @@
 import { Container, Row } from "react-bootstrap";
 import CardReceta from "./producto/CardReceta";
 import Paginacion from "./Paginacion";
+import { useEffect, useState } from "react";
+import { leerRecetas } from "../../helpers/queries.js";
 
 const Inicio = () => {
-  const recetasLocalStorage = JSON.parse(localStorage.getItem("recetas")) || [];
+  const [listaRecetas, setListaRecetas] = useState([]);
+
+  useEffect(() => {
+      obtenerRecetas();
+    }, []);
+
+  const obtenerRecetas = async () => {
+      const respuesta = await leerRecetas();
+      if (respuesta.status === 200) {
+        const datos = await respuesta.json();
+        setListaRecetas(datos);
+      } else {
+        console.info("Ocurrio un error al buscar las recetas");
+      }
+    };
 
   return (
     <section>
@@ -35,11 +51,11 @@ const Inicio = () => {
           niveles.
         </h4>
         <Row>
-          {recetasLocalStorage.map((receta) => (
-            <CardReceta receta={receta} key={receta.id}></CardReceta>
+          {listaRecetas.map((receta) => (
+            <CardReceta receta={receta} key={receta._id}></CardReceta>
           ))}
         </Row>
-        {recetasLocalStorage.length === 0 ? (
+        {listaRecetas.length === 0 ? (
           <p className="text-center fs-5 mt-4">
             <i className="bi bi-x display-3"></i>
             <br></br>No hay recetas agregadas
