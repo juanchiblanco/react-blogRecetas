@@ -5,10 +5,14 @@ import { borrarRecetaID, leerRecetas, obtenerRecetaID } from "../../../helpers/q
 const ItemReceta = ({
   receta,
   fila,
-  handleShow,
-  setTitulo,
+  prepararModal,
   setListaRecetas
 }) => {
+
+  const prepararEdicion = () =>{
+    prepararModal(receta._id)
+  }
+
   const eliminarReceta = () => {
     Swal.fire({
       title: "Eliminar receta",
@@ -42,12 +46,6 @@ const ItemReceta = ({
     });
   };
 
-  const prepararModal = () => {
-    handleShow();
-    setTitulo("Editar receta");
-    obtenerRecetaID(receta._id)
-  };
-
   return (
     <tr>
       <td className="text-center">{fila}</td>
@@ -63,7 +61,7 @@ const ItemReceta = ({
       <td>{receta.formDificultad}</td>
       <td className="text-center">
         <div className="d-flex gap-1">
-          <Button variant="warning" className="me-lg-2" onClick={prepararModal}>
+          <Button variant="warning" className="me-lg-2" onClick={prepararEdicion}>
             <i className="bi bi-pencil-square"></i>
           </Button>
           <Button variant="danger" onClick={eliminarReceta}>

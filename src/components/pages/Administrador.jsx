@@ -4,16 +4,15 @@ import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import { datosPrueba } from "../../data/datosPrueba";
-import { v4 as uuidv4 } from "uuid";
 import ItemReceta from "./producto/ItemReceta";
 import ItemIngrediente from "./producto/ItemIngrediente";
 import ItemPaso from "./producto/ItemPaso";
 import {
   crearReceta,
+  editarReceta,
   leerRecetas,
   obtenerRecetaID,
-} from "../../helpers/queries";
+} from "../../helpers/queries.js";
 import { useNavigate, useParams } from "react-router";
 
 const Administrador = () => {
@@ -23,8 +22,9 @@ const Administrador = () => {
 
   useEffect(() => {
     obtenerRecetas();
-    obtenerReceta();
   }, []);
+
+  const { id } = useParams();
 
   const obtenerRecetas = async () => {
     const respuesta = await leerRecetas();
@@ -37,36 +37,43 @@ const Administrador = () => {
   };
 
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+  };
   const handleShow = () => {
     setShow(true);
-    setTitulo("Agregar receta");
   };
   const [ingrediente, setIngrediente] = useState("");
   const [paso, setPaso] = useState("");
   const [ingredientes, setIngredientes] = useState([]);
   const [pasos, setPasos] = useState([]);
-  const [titulo, setTitulo] = useState("Editar receta");
-  const { id } = useParams();
+  const [titulo, setTitulo] = useState("");
 
-  async function obtenerReceta() {
-    if (titulo === "Editar receta") {
-      const respuesta = await obtenerRecetaID(id);
-      if (respuesta.status === 200) {
-        const recetaBuscada = await respuesta.json();
-        setValue("formPlato", recetaBuscada.formPlato);
-        setValue("formDuracion", recetaBuscada.formDuracion);
-        setValue("formPorciones", recetaBuscada.formPorciones);
-        setValue("formImagen", recetaBuscada.formImagen);
-        setValue("formDificultad", recetaBuscada.formDificultad);
-        setValue("formTip", recetaBuscada.formTip);
-        setValue("formDescripcionBreve", recetaBuscada.formDescripcionBreve);
-        setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
-        setIngredientes(recetaBuscada.ingredientes);
-        setPasos(recetaBuscada.pasos);
-      }
+  const prepararModal = async (id) => {
+    const respuesta = await obtenerRecetaID(id);
+    if (respuesta.status === 200) {
+      const recetaBuscada = await respuesta.json();
+      setValue("formPlato", recetaBuscada.formPlato);
+      setValue("formDuracion", recetaBuscada.formDuracion);
+      setValue("formPorciones", recetaBuscada.formPorciones);
+      setValue("formImagen", recetaBuscada.formImagen);
+      setValue("formDificultad", recetaBuscada.formDificultad);
+      setValue("formTip", recetaBuscada.formTip);
+      setValue("formDescripcionBreve", recetaBuscada.formDescripcionBreve);
+      setValue("formDescripcionAmplia", recetaBuscada.formDescripcionAmplia);
+      setIngredientes(recetaBuscada.ingredientes);
+      setPasos(recetaBuscada.pasos);
+      setValue("_id", recetaBuscada._id);
+
+      setTitulo("Editar receta");
+      handleShow();
     }
-  }
+  };
+
+  const prepararCrearReceta = () => {
+    handleShow();
+    setTitulo("Agregar receta");
+  };
 
   const {
     register,
@@ -77,25 +84,34 @@ const Administrador = () => {
   } = useForm();
 
   const onSubmit = async (receta) => {
+    const recetaFinal = { ...receta, ingredientes, pasos };
     if (titulo === "Agregar receta") {
-      const respuesta = await crearReceta(receta);
+      const respuesta = await crearReceta(recetaFinal);
       if (respuesta.status === 201) {
         Swal.fire({
           title: "Receta creada!",
           text: `La receta ${receta.formPlato} fue creada correctacmente`,
           icon: "success",
         });
+        await obtenerRecetas();
         reset();
+        setIngredientes([]);
+        setPasos([]);
+        handleClose();
       }
     } else {
-      const respuesta = await editarReceta(receta, id);
+      const respuesta = await editarReceta(recetaFinal, receta._id);
       if (respuesta.status === 200) {
         Swal.fire({
           title: "Receta editada",
           text: `La receta ${receta.formPlato} fue actualizada correctamente.`,
           icon: "success",
         });
-        navegacion("/administrador");
+        await obtenerRecetas();
+        reset();
+        setIngredientes([]);
+        setPasos([]);
+        handleClose();
       }
     }
   };
@@ -163,7 +179,7 @@ const Administrador = () => {
       <div className="d-flex justify-content-between align-items-center mt-5">
         <h1 className="display-4 tinos">Mis Recetas</h1>
         <div>
-          <Button className="btn btn-success" onClick={handleShow}>
+          <Button className="btn btn-success" onClick={prepararCrearReceta}>
             <i className="bi bi-file-earmark-plus"></i>
           </Button>
         </div>
@@ -189,6 +205,7 @@ const Administrador = () => {
               handleShow={handleShow}
               setTitulo={setTitulo}
               setListaRecetas={setListaRecetas}
+              prepararModal={prepararModal}
             ></ItemReceta>
           ))}
         </tbody>
