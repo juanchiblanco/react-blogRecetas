@@ -24,7 +24,10 @@ const DetalleReceta = () => {
 
   return (
     <Container className="my-3">
-      <Card>
+      <Link className="text-decoration-none text-light" to={`/`}>
+            Volver atrás
+          </Link>
+      <Card className="mt-2">
         <Row>
           <Col md={6}>
             <Card.Img
