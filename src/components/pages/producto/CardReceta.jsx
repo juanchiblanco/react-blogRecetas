@@ -2,6 +2,7 @@ import { Col, Card } from "react-bootstrap";
 import { Link } from "react-router";
 
 const CardReceta = ({receta}) => {
+
     return (
         <Col md={4} lg={3} className="my-3">
       <Card className="h-100 shadow">
@@ -30,7 +31,7 @@ const CardReceta = ({receta}) => {
           </div>
         </Card.Body>
         <Card.Footer className="text-center">
-          <Link variant="success" className="w-50 btn btn-success" to={`/detalle/${receta.id}`}>
+          <Link variant="success" className="w-50 btn btn-success" to={`/detalle/${receta._id}`}>
             Ver receta
           </Link>
         </Card.Footer>
