@@ -9,10 +9,15 @@ import Login from "./components/pages/Login";
 import DetalleReceta from "./components/pages/DetalleReceta";
 import { useState } from "react";
 import ProtectorAdmin from "./components/ProtectorAdmin";
+import { useEffect } from "react";
 
 function App() {
-  const usuarioLogueado = sessionStorage.getItem("userKey") || false;
+  const usuarioLogueado = JSON.parse(sessionStorage.getItem("userKey")) || {}
   const [usuarioAdmin, setUsuarioAdmin] = useState(usuarioLogueado);
+
+  useEffect(()=>{
+    sessionStorage.setItem('userKey', JSON.stringify(usuarioAdmin))
+  }, [usuarioAdmin])
 
   return (
     <>

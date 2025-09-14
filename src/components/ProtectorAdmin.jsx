@@ -1,7 +1,7 @@
 import { Navigate, Outlet } from "react-router";
 
 const ProtectorAdmin = ({ usuarioAdmin }) => {
-  if (!usuarioAdmin) {
+  if (!usuarioAdmin.token) {
     return <Navigate to={"/"}></Navigate>;
   }
    return <Outlet></Outlet>;
