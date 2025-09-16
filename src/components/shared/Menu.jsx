@@ -23,8 +23,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       title: "Sesión cerrada",
       text: "Nos vemos la próxima.",
     });
-    setUsuarioAdmin(false);
-    sessionStorage.removeItem("userKey");
+    setUsuarioAdmin({});
     navegacion("/");
   }
 });
@@ -53,7 +52,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
             <NavLink className="nav-link" to={"/"}>
               Inicio
             </NavLink>
-            {usuarioAdmin ? (
+            {usuarioAdmin.token ? (
               <>
                 <NavLink className="nav-link" to={"/administrador"}>
                   Administrador
