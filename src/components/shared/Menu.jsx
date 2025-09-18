@@ -119,7 +119,7 @@ const Menu = ({ usuarioAdmin, setUsuarioAdmin }) => {
       </Container>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Crea tu cuenta</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form className="raleway" onSubmit={handleSubmit(crearCuenta)}>
