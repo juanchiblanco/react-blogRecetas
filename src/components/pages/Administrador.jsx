@@ -11,26 +11,28 @@ import {
   crearReceta,
   editarReceta,
   leerRecetas,
+  leerRecetasPaginadas,
   obtenerRecetaID,
 } from "../../helpers/queries.js";
-import { useNavigate, useParams } from "react-router";
 
 const Administrador = () => {
   const [listaRecetas, setListaRecetas] = useState([]);
 
-  const navegacion = useNavigate();
+  const [page, setPage] = useState(1);
+  const [limit] = useState(5);
+  const [totalPages, setTotalPages] = useState(1);
 
   useEffect(() => {
     obtenerRecetas();
-  }, []);
-
-  const { id } = useParams();
+  }, [page]);
 
   const obtenerRecetas = async () => {
-    const respuesta = await leerRecetas();
+    const respuesta = await leerRecetasPaginadas(page, limit);
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      setListaRecetas(datos);
+      console.log("Respuesta recetas:", datos)
+      setListaRecetas(datos.recetas);
+      setTotalPages(datos.totalPages)
     } else {
       console.info("Ocurrio un error al buscar las recetas");
     }
@@ -201,15 +203,36 @@ const Administrador = () => {
             <ItemReceta
               key={receta._id}
               receta={receta}
-              fila={indice + 1}
+              fila={(page - 1) * limit + indice + 1}
               handleShow={handleShow}
               setTitulo={setTitulo}
               setListaRecetas={setListaRecetas}
               prepararModal={prepararModal}
+              limit={limit}
+              page={page}
             ></ItemReceta>
           ))}
         </tbody>
       </Table>
+      <div className="d-flex justify-content-center align-items-center my-3">
+        <Button
+          variant="secondary"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1}
+        >
+          Anterior
+        </Button>
+        <span className="mx-3">
+          Página {page} de {totalPages}
+        </span>
+        <Button
+          variant="secondary"
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages}
+        >
+          Siguiente
+        </Button>
+      </div>
       <Modal show={show} onHide={() => setShow(false)}>
         <Form className="my-4" onSubmit={handleSubmit(onSubmit)}>
           <Modal.Header closeButton>

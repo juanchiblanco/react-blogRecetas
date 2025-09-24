@@ -1,6 +1,5 @@
 import { Container, Row } from "react-bootstrap";
 import CardReceta from "./producto/CardReceta";
-import Paginacion from "./Paginacion";
 import { useEffect, useState } from "react";
 import { leerRecetas } from "../../helpers/queries.js";
 
@@ -62,7 +61,6 @@ const Inicio = () => {
           </p>
         ) : (
           <div className="d-flex justify-content-center mt-5">
-            <Paginacion></Paginacion>
           </div>
         )}
       </Container>

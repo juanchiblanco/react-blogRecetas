@@ -103,3 +103,13 @@ export const registro = async (nuevoUsuario) => {
     return null;
   }
 };
+
+export const leerRecetasPaginadas = async (page, limit) => {
+  try {
+    const respuesta = await fetch(`${urlRecetas}/paginacion?page=${page}&limit=${limit}`);
+    return respuesta;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
