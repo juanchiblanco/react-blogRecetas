@@ -30,7 +30,6 @@ const Administrador = () => {
     const respuesta = await leerRecetasPaginadas(page, limit);
     if (respuesta.status === 200) {
       const datos = await respuesta.json();
-      console.log("Respuesta recetas:", datos)
       setListaRecetas(datos.recetas);
       setTotalPages(datos.totalPages)
     } else {
