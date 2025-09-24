@@ -1,12 +1,14 @@
 import { Button } from "react-bootstrap";
 import Swal from "sweetalert2";
-import { borrarRecetaID, leerRecetas, obtenerRecetaID } from "../../../helpers/queries.js";
+import { borrarRecetaID, leerRecetas, leerRecetasPaginadas, obtenerRecetaID } from "../../../helpers/queries.js";
 
 const ItemReceta = ({
   receta,
   fila,
   prepararModal,
-  setListaRecetas
+  setListaRecetas,
+  page,
+  limit
 }) => {
 
   const prepararEdicion = () =>{
@@ -32,9 +34,9 @@ const ItemReceta = ({
             text: `La receta de ${receta.formPlato} fue eliminada correctamente`,
             icon: "success",
           });
-          const respuestaRecetas = await leerRecetas()
+          const respuestaRecetas = await leerRecetasPaginadas(page, limit)
           const recetasActualizadas = await respuestaRecetas.json()
-          setListaRecetas(recetasActualizadas)
+          setListaRecetas(recetasActualizadas.recetas)
         } else {
           Swal.fire({
             title: "Ocurrió un error!",
